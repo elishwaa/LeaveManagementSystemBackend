@@ -7,6 +7,6 @@ namespace LeaveManagementSystemModels
 {
     public class NewProject
     {
-        public string project { get; set; }
+        public string Project { get; set; }
     }
 }

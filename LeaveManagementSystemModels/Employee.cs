@@ -8,6 +8,7 @@ namespace LeaveManagementSystemModels
     public class Employee
     {
         public int typeid;
+        public object id;
 
         public int Id { get; set; }
         public int TypeId { get; set; }

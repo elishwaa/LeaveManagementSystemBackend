@@ -7,7 +7,7 @@ namespace LeaveManagementSystemModels
 {
     public class Managers
     {
-        public int managerId { get; set; }
-        public string managerName { get; set; }
+        public int ManagerId { get; set; }
+        public string ManagerName { get; set; }
     }
 }

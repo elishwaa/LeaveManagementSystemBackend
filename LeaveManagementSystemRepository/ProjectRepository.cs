@@ -32,8 +32,8 @@ namespace LeaveManagementSystemRepository
             while (sdr.Read())
             {
                 Projects projects = new Projects();
-                projects.projectId = (int)sdr["Id"];
-                projects.projectName = sdr["ProjectName"].ToString();
+                projects.ProjectId = (int)sdr["Id"];
+                projects.ProjectName = sdr["ProjectName"].ToString();
 
                 lst.Add(projects);
 
@@ -50,7 +50,7 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
-                sqlComm.Parameters.AddWithValue("@project", newProject.project);
+                sqlComm.Parameters.AddWithValue("@project", newProject.Project);
                 sqlComm.ExecuteNonQuery();
                 sqlconn.Close();
                 return true;

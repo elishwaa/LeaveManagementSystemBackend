@@ -1,10 +1,328 @@
-﻿using System;
+﻿using LeaveManagementSystemModels;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace LeaveManagementSystemRepository
 {
     public class LeaveRepository : ILeaveRepository
     {
+        private readonly string connectionString;
+
+        public LeaveRepository(IConfiguration configuration)
+        {
+            connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+
+        public IEnumerable<LeaveRequestHistory> AllLeaveRequests(int id)
+        {
+            List<LeaveRequestHistory> lstLeaveRequest = new List<LeaveRequestHistory>();
+            SqlConnection sqlconn = new SqlConnection(connectionString);
+            SqlCommand sqlComm = new SqlCommand("AllLeaveRequests");
+            sqlconn.Open();
+            sqlComm.Connection = sqlconn;
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.Parameters.AddWithValue("@Id", id);
+            SqlDataReader sdr = sqlComm.ExecuteReader();
+            while (sdr.Read())
+            {
+                LeaveRequestHistory leaveRequestHistory = new LeaveRequestHistory();
+                leaveRequestHistory.Id = (int)sdr["Id"];
+                leaveRequestHistory.EmpId = (int)sdr["EmployeeId"];
+                leaveRequestHistory.EmployeeName = sdr["EmpName"].ToString();
+                leaveRequestHistory.StartDate = (DateTime)sdr["StartDate"];
+                leaveRequestHistory.EndDate = (DateTime)sdr["EndDate"];
+                leaveRequestHistory.LeaveId = (int)sdr["LeaveId"];
+                leaveRequestHistory.Leave = sdr["EType"].ToString();
+                leaveRequestHistory.Status = sdr["Status"].ToString();
+                leaveRequestHistory.Reason = sdr["Reason"].ToString();
+                lstLeaveRequest.Add(leaveRequestHistory);
+            }
+            sqlconn.Close();
+            return lstLeaveRequest;
+        }
+
+        public bool ApproveLeaveRequest(LeaveRequestHistory leave)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("ApproveLeaveRequest");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@Id", leave.Id);
+                sqlComm.Parameters.AddWithValue("@empId", leave.EmpId);
+                sqlComm.Parameters.AddWithValue("@startDate", leave.StartDate);
+                sqlComm.Parameters.AddWithValue("@endDate", leave.EndDate);
+                sqlComm.Parameters.AddWithValue("@leaveId", leave.LeaveId);
+                sqlComm.Parameters.AddWithValue("@reason", leave.Reason);
+                SqlParameter returnParameter = sqlComm.Parameters.Add("RetVal", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                sqlComm.ExecuteNonQuery();
+                int id = (int)returnParameter.Value;
+                if (id == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool AuditProcess(AuditLeaves audit)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("AuditLeaves");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@year", audit.Year);
+                sqlComm.Parameters.AddWithValue("@leaveId", audit.LeaveId);
+                sqlComm.Parameters.AddWithValue("@days", audit.NumberOfDays);
+                sqlComm.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteRequest(int id)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("DeleteRequest");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@leaveRequestId", id);
+                sqlComm.ExecuteNonQuery();
+                sqlconn.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool EditAndApprove(LeaveRequestHistory leaveRequest)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("EditAndApprove");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@id", leaveRequest.Id);
+                sqlComm.Parameters.AddWithValue("@empId", leaveRequest.EmpId);
+                sqlComm.Parameters.AddWithValue("@startDate", leaveRequest.StartDate.ToString());
+                sqlComm.Parameters.AddWithValue("@endDate", leaveRequest.EndDate.ToString());
+                sqlComm.Parameters.AddWithValue("@leaveId", leaveRequest.LeaveId.ToString());
+                sqlComm.Parameters.AddWithValue("@leave", leaveRequest.Leave.ToString());
+                sqlComm.ExecuteNonQuery();
+                sqlconn.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public string GetLeaveBalance(int id)
+        {
+            SqlConnection sqlconn = new SqlConnection(connectionString);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter();
+            DataSet dataset = new DataSet();
+            sqlconn.Open();
+            SqlCommand sqlComm = new SqlCommand("GetLeaveBalance", sqlconn);
+            sqlComm.Parameters.Add(new SqlParameter("@id", id));
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand = sqlComm;
+            dataAdapter.Fill(dataset);
+            
+            dataset.Tables[0].TableName = "LeaveBalanceData";
+            dataset.Tables[1].TableName = "Leaves";
+            string json = JsonConvert.SerializeObject(dataset, Formatting.Indented);
+
+            return json;
+        }
+
+        public IEnumerable<LeaveRequestHistory> GetLeaveRequests(int id)
+        {
+            List<LeaveRequestHistory> lstLeaveRequest = new List<LeaveRequestHistory>();
+            SqlConnection sqlconn = new SqlConnection(connectionString);
+            SqlCommand sqlComm = new SqlCommand("GetLeaveRequests");
+            sqlconn.Open();
+            sqlComm.Connection = sqlconn;
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.Parameters.AddWithValue("@empId", id);
+            SqlDataReader sdr = sqlComm.ExecuteReader();
+            while (sdr.Read())
+            {
+                LeaveRequestHistory leaveRequestHistory = new LeaveRequestHistory();
+                leaveRequestHistory.Id = (int)sdr["Id"];
+                leaveRequestHistory.EmpId = (int)sdr["EmployeeId"];
+                leaveRequestHistory.EmployeeName = sdr["FirstName"].ToString();
+                leaveRequestHistory.StartDate = (DateTime)sdr["StartDate"];
+                leaveRequestHistory.EndDate = (DateTime)sdr["EndDate"];
+                leaveRequestHistory.LeaveId = (int)sdr["LeaveId"];
+                leaveRequestHistory.Leave = sdr["EType"].ToString();
+                leaveRequestHistory.Status = sdr["Status"].ToString();
+                leaveRequestHistory.Reason = sdr["Reason"].ToString();
+                lstLeaveRequest.Add(leaveRequestHistory);
+            }
+            sqlconn.Close();
+            return lstLeaveRequest;
+        }
+
+        public IEnumerable<Leaves> GetLeaves()
+        {
+            List<Leaves> lstLeaves = new List<Leaves>();
+
+            SqlConnection sqlconn = new SqlConnection(connectionString);
+            SqlCommand sqlComm = new SqlCommand("GetLeaves");
+            sqlconn.Open();
+            sqlComm.Connection = sqlconn;
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            SqlDataReader sdr = sqlComm.ExecuteReader();
+            while (sdr.Read())
+            {
+                Leaves leaves = new Leaves();
+                leaves.Id = (int)sdr["Id"];
+                leaves.LeaveName = sdr["EType"].ToString();
+                lstLeaves.Add(leaves);
+            }
+
+            return lstLeaves;
+        }
+
+        public bool NewLeave(NewLeave newLeave)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("NewLeave");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@leave", newLeave.Leave);
+                sqlComm.ExecuteNonQuery();
+                sqlconn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public bool SaveLeaveRequests(LeaveRequest leaverequest)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("LeaveRequest");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@empId", leaverequest.EmpId);
+                sqlComm.Parameters.AddWithValue("@startDate", leaverequest.StartDate.ToString("MM-dd-yyyy"));
+                sqlComm.Parameters.AddWithValue("@endDate", leaverequest.EndDate.ToString("MM-dd-yyyy"));
+                sqlComm.Parameters.AddWithValue("@leaveId", leaverequest.Leave);
+                sqlComm.Parameters.AddWithValue("@reason", leaverequest.Reason);
+                SqlParameter returnParameter = sqlComm.Parameters.Add("RetVal", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                sqlComm.ExecuteNonQuery();
+                int id = (int)returnParameter.Value;
+                if (id == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public IEnumerable<Transactions> Transactions(int id)
+        {
+            List<Transactions> lstTransactions = new List<Transactions>();
+
+            SqlConnection sqlconn = new SqlConnection(connectionString);
+            SqlCommand sqlComm = new SqlCommand("Transactions");
+            sqlconn.Open();
+            sqlComm.Connection = sqlconn;
+            sqlComm.CommandType = CommandType.StoredProcedure;
+            sqlComm.Parameters.AddWithValue("@employeeId", id);
+            SqlDataReader sdr = sqlComm.ExecuteReader();
+
+            while (sdr.Read())
+            {
+                Transactions transactions = new Transactions();
+                transactions.EmpId = (int)sdr["Id"];
+                transactions.EmpName = sdr["EmployeeName"].ToString();
+                transactions.LeaveType = sdr["leave"].ToString();
+                transactions.StartDate = (DateTime)sdr["Startdate"];
+                transactions.EndDate = (DateTime)sdr["EndDate"];
+                transactions.Totaldays = (int)sdr["NumberOfDays"];
+                transactions.Status = sdr["Status"].ToString();
+                lstTransactions.Add(transactions);
+            }
+
+            return lstTransactions;
+        }
+
+        public bool UpdateLeaveBalance(List<EmployeeUpdatedLeaveBalance> leaveBalance)
+        {
+            try
+            {
+                foreach (var i in leaveBalance[0].Leaves)
+                {
+                    SqlConnection sqlconn = new SqlConnection(connectionString);
+                    SqlCommand sqlComm = new SqlCommand("UpdateLeaveBalance");
+                    sqlconn.Open();
+                    sqlComm.Connection = sqlconn;
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+                    sqlComm.Parameters.AddWithValue("@employeeId", leaveBalance[0].EmployeeId);
+                    sqlComm.Parameters.AddWithValue("@leaveId", i.LeaveId);
+                    sqlComm.Parameters.AddWithValue("@value", i.Value);
+                    sqlComm.Parameters.AddWithValue("@year", leaveBalance[0].Year);
+                    sqlComm.ExecuteNonQuery();
+                    sqlconn.Close();
+                }
+                return true;
+            }
+
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

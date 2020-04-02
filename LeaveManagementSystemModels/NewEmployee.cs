@@ -7,14 +7,14 @@ namespace LeaveManagementSystemModels
 {
     public class NewEmployee
     {
-        public int empType { get; set; }
-        public string firstName { get; set; }
-        public string middleName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public int salary { get; set; }
-        public int manager { get; set; }
-        public int project { get; set; }
-        public int location { get; set; }
+        public int EmpType { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public int Salary { get; set; }
+        public int Manager { get; set; }
+        public int Project { get; set; }
+        public int Location { get; set; }
     }
 }

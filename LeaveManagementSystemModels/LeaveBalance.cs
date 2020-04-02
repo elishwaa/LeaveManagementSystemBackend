@@ -7,10 +7,10 @@ namespace LeaveManagementSystemModels
 {
     public class LeaveBalance
     {
-        public int id { get; set; }
-        public string employeeName { get; set; }
-        public int casualLeave { get; set; }
-        public int sickLeave { get; set; }
-        public int other { get; set; }
+        public int Id { get; set; }
+        public string EmployeeName { get; set; }
+        public int CasualLeave { get; set; }
+        public int SickLeave { get; set; }
+        public int Other { get; set; }
     }
 }

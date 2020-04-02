@@ -1,13 +1,8 @@
 ﻿
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using LMSWeb.Models;
 using LeaveManagementSystemService;
-using LeaveManagementSystemModels;
+using System.Linq;
 
 namespace LMSWeb.Controllers
 {
@@ -29,13 +24,6 @@ namespace LMSWeb.Controllers
         {
             var employee = _loginService.GetLogin(loginDetails);
             return employee;
-        }
-
-        [HttpGet]
-        [Route("GetEmpType")]
-        public IEnumerable<LeaveManagementSystemModels.EmployeeType> GetEmpType()
-        {
-            return _loginService.GetEmpType();
         }
 
         [HttpPost]

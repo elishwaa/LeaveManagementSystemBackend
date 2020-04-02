@@ -8,7 +8,7 @@ using System.Text;
 
 namespace LeaveManagementSystemRepository
 {
-    public class LocationRepository :ILeaveRepository
+    public class LocationRepository :ILocationRepository
     {
         private readonly string connectionString;
 
@@ -27,7 +27,7 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
-                sqlComm.Parameters.AddWithValue("@location", newLocation.location);
+                sqlComm.Parameters.AddWithValue("@location", newLocation.Location);
                 sqlComm.ExecuteNonQuery();
                 sqlconn.Close();
                 return true;
@@ -51,8 +51,8 @@ namespace LeaveManagementSystemRepository
             while (sdr.Read())
             {
                 Locations location = new Locations();
-                location.locationId = (int)sdr["Id"];
-                location.locationName = sdr["LName"].ToString();
+                location.LocationId = (int)sdr["Id"];
+                location.LocationName = sdr["LName"].ToString();
                 lstLocation.Add(location);
             }
             return lstLocation;

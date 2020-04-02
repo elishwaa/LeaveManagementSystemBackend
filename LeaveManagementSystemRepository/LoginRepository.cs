@@ -64,30 +64,6 @@ namespace LeaveManagementSystemRepository
             return employee;
         }
 
-        public IEnumerable<EmployeeType> GetEmpType()
-        {
-            List<EmployeeType> lstEmpType = new List<EmployeeType>();
-
-            //if (HttpContext.Session.GetString(SessionName) != null)
-            //{
-
-            SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetEmployeeType");
-            sqlconn.Open();
-            sqlComm.Connection = sqlconn;
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            SqlDataReader sdr = sqlComm.ExecuteReader();
-            while (sdr.Read())
-            {
-                EmployeeType empType = new EmployeeType();
-                empType.id = (int)sdr["Id"];
-                empType.empType = sdr["EType"].ToString();
-                lstEmpType.Add(empType);
-            }
-
-
-            return lstEmpType;
-        }
         public bool NewLogin(NewLogin newLogin)
         {
             //if (HttpContext.Session.GetString(SessionName) == null)
@@ -97,9 +73,9 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
-                sqlComm.Parameters.AddWithValue("@employeeId", newLogin.employeeId);
-                sqlComm.Parameters.AddWithValue("@username", newLogin.username);
-                sqlComm.Parameters.AddWithValue("@password", newLogin.password);
+                sqlComm.Parameters.AddWithValue("@employeeId", newLogin.EmployeeId);
+                sqlComm.Parameters.AddWithValue("@username", newLogin.Username);
+                sqlComm.Parameters.AddWithValue("@password", newLogin.Password);
 
                 SqlParameter returnParameter = sqlComm.Parameters.Add("RetVal", SqlDbType.Int);
                 returnParameter.Direction = ParameterDirection.ReturnValue;
@@ -114,7 +90,7 @@ namespace LeaveManagementSystemRepository
                 {
                     returnValue = true;
                 }
-            //}
+           
             return returnValue;
         }
     }

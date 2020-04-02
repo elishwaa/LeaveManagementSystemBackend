@@ -7,6 +7,6 @@ namespace LeaveManagementSystemModels
 {
     public class NewLeave
     {
-        public string leave { get; set; }
+        public string Leave { get; set; }
     }
 }

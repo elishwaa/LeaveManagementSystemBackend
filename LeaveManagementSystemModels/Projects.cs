@@ -7,7 +7,7 @@ namespace LeaveManagementSystemModels
 {
     public class Projects
     {
-        public int projectId { get; set; }
-        public string projectName { get; set; }
+        public int ProjectId { get; set; }
+        public string ProjectName { get; set; }
     }
 }

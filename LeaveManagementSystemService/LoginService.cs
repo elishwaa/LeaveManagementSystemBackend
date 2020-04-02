@@ -28,17 +28,6 @@ namespace LeaveManagementSystemService
             }
 
         }
-        public IEnumerable<EmployeeType> GetEmpType()
-        {
-            try
-            {
-                return _loginRepository.GetEmpType();
-            }
-            catch
-            {
-                return null;
-            }
-        }
         public bool NewLogin(NewLogin newLogin)
         {
             return _loginRepository.NewLogin(newLogin);

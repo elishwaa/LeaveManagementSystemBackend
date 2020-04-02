@@ -7,7 +7,7 @@ namespace LeaveManagementSystemModels
 {
     public class EmployeeType
     {
-        public int id { get; set; }
-        public string empType { get; set; }
+        public int Id { get; set; }
+        public string EmpType { get; set; }
     }
 }

@@ -8,7 +8,6 @@ namespace LeaveManagementSystemService
     public interface ILoginService : IService
     {
       Employee GetLogin(LoginDetails loginDetails);
-      IEnumerable<EmployeeType> GetEmpType();
       bool NewLogin(NewLogin newLogin);
     }
 }

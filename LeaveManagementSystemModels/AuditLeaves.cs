@@ -7,8 +7,8 @@ namespace LeaveManagementSystemModels
 {
     public class AuditLeaves
     {
-        public int year { get; set; }
-        public int leaveId { get; set; }
-        public int numberOfDays {get;set;}
+        public int Year { get; set; }
+        public int LeaveId { get; set; }
+        public int NumberOfDays {get;set;}
     }
 }

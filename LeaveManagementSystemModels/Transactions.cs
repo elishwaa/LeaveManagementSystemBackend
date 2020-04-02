@@ -7,12 +7,12 @@ namespace LeaveManagementSystemModels
 {
     public class Transactions
     {
-        public int empId { get; set; }
-        public string empName { get; set; }
-        public string leaveType { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate  { get; set; }
-        public int totaldays { get; set; }
-        public string status { get; set; }
+        public int EmpId { get; set; }
+        public string EmpName { get; set; }
+        public string LeaveType { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate  { get; set; }
+        public int Totaldays { get; set; }
+        public string Status { get; set; }
     }
 }

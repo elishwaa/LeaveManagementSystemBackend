@@ -7,7 +7,7 @@ namespace LeaveManagementSystemModels
 {
     public class Leaves
     {
-        public int id { get; set; }
-        public string leaveName { get; set; }
+        public int Id { get; set; }
+        public string LeaveName { get; set; }
     }
 }
