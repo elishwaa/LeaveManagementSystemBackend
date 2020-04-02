@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class EmployeeType
+    public class EmployeeType: LeaveManagementSystemModels.EmployeeType
     {
-        public int id { get; set; }
-        public string empType { get; set; }
     }
 }

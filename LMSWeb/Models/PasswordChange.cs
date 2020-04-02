@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class PasswordChange
+    public class PasswordChange: LeaveManagementSystemModels.PasswordChange
     {
-        public int id { get; set; }
-        public string password { get; set; }
+    
     }
 }

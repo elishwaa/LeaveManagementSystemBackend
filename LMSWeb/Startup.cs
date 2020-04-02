@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System.Web.Http.Cors;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace LMSWeb
 {
@@ -34,11 +27,7 @@ namespace LMSWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //  services.AddSwaggerGen(C =>
-            //  {
-            //      C.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            //  }
-            //);
+           
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -50,8 +39,14 @@ namespace LMSWeb
                         .AllowAnyMethod();
                     });
             });
+            services.AddTransient<LeaveManagementSystemService.ILoginService, LeaveManagementSystemService.LoginService>();
+            services.AddTransient<LeaveManagementSystemRepository.ILoginRepository, LeaveManagementSystemRepository.LoginRepository>();
             services.AddControllers();
-            //services.AddCors();
+            services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +66,8 @@ namespace LMSWeb
             //    C.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
             //    C.RoutePrefix = "swagger";
             //});
+            app.UseSession();
+            
             app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();

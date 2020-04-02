@@ -5,16 +5,7 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class LeaveRequestHistory
+    public class LeaveRequestHistory : LeaveManagementSystemModels.LeaveRequestHistory
     {
-        public int id { get; set; }
-        public int empId { get; set; }
-        public string employeeName { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
-        public int leaveId { get; set; }
-        public string leave { get; set; }
-        public string status { get; set; }
-        public string reason { get; set; }
     }
 }

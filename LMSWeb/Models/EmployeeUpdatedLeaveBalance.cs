@@ -5,12 +5,7 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class EmployeeUpdatedLeaveBalance
+    public class EmployeeUpdatedLeaveBalance: LeaveManagementSystemModels.EmployeeUpdatedLeaveBalance
     {
-        public int employeeId { get; set; }
-        public List<UpdatedLeaves> leaves { get; set; }
-        public int year { get; set; }
-
-
     }
 }

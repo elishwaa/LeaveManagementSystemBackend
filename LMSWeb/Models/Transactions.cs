@@ -5,14 +5,8 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class Transactions
+    public class Transactions : LeaveManagementSystemModels.Transactions
     {
-        public int empId { get; set; }
-        public string empName { get; set; }
-        public string leaveType { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate  { get; set; }
-        public int totaldays { get; set; }
-        public string status { get; set; }
+        
     }
 }

@@ -220,3 +220,13 @@ D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\obj\Debug\netcoreapp3.1\LMSWeb.d
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\obj\Debug\netcoreapp3.1\LMSWeb.pdb
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\obj\Debug\netcoreapp3.1\LMSWeb.MvcApplicationPartsAssemblyInfo.cs
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\obj\Debug\netcoreapp3.1\LMSWeb.MvcApplicationPartsAssemblyInfo.cache
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Https.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\LeaveManagementSystemModels.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\LeaveManagementSystemRepository.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\LeaveManagementSystemService.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\LeaveManagementSystemService.pdb
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\LeaveManagementSystemModels.pdb
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\LeaveManagementSystemRepository.pdb

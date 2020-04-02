@@ -1,0 +1,8 @@
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\bin\Debug\netcoreapp3.1\LeaveManagementSystemModels.deps.json
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\bin\Debug\netcoreapp3.1\LeaveManagementSystemModels.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\bin\Debug\netcoreapp3.1\LeaveManagementSystemModels.pdb
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\obj\Debug\netcoreapp3.1\LeaveManagementSystemModels.csprojAssemblyReference.cache
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\obj\Debug\netcoreapp3.1\LeaveManagementSystemModels.AssemblyInfoInputs.cache
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\obj\Debug\netcoreapp3.1\LeaveManagementSystemModels.AssemblyInfo.cs
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\obj\Debug\netcoreapp3.1\LeaveManagementSystemModels.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemModels\obj\Debug\netcoreapp3.1\LeaveManagementSystemModels.pdb

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class NewLocation
+    public class NewLocation : LeaveManagementSystemModels.NewLocation
     {
-        public string location { get; set; }
 
     }
 }

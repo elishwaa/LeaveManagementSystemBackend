@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class newDesignation
+    public class newDesignation : LeaveManagementSystemModels.newDesignation
     {
-        public string designation { get; set; }
+     
     }
 }

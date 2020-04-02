@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class NewLeave
+    public class NewLeave : LeaveManagementSystemModels.NewLeave
     {
-        public string leave { get; set; }
     }
 }

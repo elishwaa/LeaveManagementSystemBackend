@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class NewProject
+    public class NewProject : LeaveManagementSystemModels.NewProject
     {
-        public string project { get; set; }
     }
 }

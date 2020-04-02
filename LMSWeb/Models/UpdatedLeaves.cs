@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace LMSWeb.Models
 {
-    public class UpdatedLeaves
+    public class UpdatedLeaves : LeaveManagementSystemModels.UpdatedLeaves
     {
-        public int leaveId { get; set; }
-        public int value { get; set; }
     }
 }
