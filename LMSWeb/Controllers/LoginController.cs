@@ -15,9 +15,6 @@ namespace LMSWeb.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        //private readonly string connectionString;
-        //public const string SessionName = "username";
-        //public bool returnValue = false;
         private readonly ILoginService _loginService;
 
         public LoginController(ILoginService loginService)

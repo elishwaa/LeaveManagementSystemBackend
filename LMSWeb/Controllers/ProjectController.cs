@@ -1,46 +1,38 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using LeaveManagementSystemModels;
+using LeaveManagementSystemService;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace LMSWeb.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class ProjectController : ControllerBase
-//    {
-//        // GET: api/Project
-//        [HttpGet]
-//        public IEnumerable<string> Get()
-//        {
-//            return new string[] { "value1", "value2" };
-//        }
+namespace LMSWeb.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProjectController : ControllerBase
+    {
+        private readonly IProjectService _projectService;
+        public ProjectController(IProjectService projectService)
+        {
+            _projectService = projectService;
+        }
 
-//        // GET: api/Project/5
-//        [HttpGet("{id}", Name = "Get")]
-//        public string Get(int id)
-//        {
-//            return "value";
-//        }
+        [HttpPost]
+        [Route("NewProject")]
+        public bool NewProject([FromBody] NewProject newProject)
+        {
+            return _projectService.NewProject(newProject);
+        }
 
-//        // POST: api/Project
-//        [HttpPost]
-//        public void Post([FromBody] string value)
-//        {
-//        }
 
-//        // PUT: api/Project/5
-//        [HttpPut("{id}")]
-//        public void Put(int id, [FromBody] string value)
-//        {
-//        }
+        [HttpGet]
+        [Route("GetProjects")]
+        public IEnumerable<Projects> GetProjects()
+        {
+            return _projectService.GetProject();
 
-//        // DELETE: api/ApiWithActions/5
-//        [HttpDelete("{id}")]
-//        public void Delete(int id)
-//        {
-//        }
-//    }
-//}
+        }
+    }
+}

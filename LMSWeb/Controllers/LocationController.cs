@@ -1,46 +1,37 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using LeaveManagementSystemModels;
+using LeaveManagementSystemService;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace LMSWeb.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class LocationController : ControllerBase
-//    {
-//        // GET: api/Location
-//        [HttpGet]
-//        public IEnumerable<string> Get()
-//        {
-//            return new string[] { "value1", "value2" };
-//        }
+namespace LMSWeb.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class LocationController : ControllerBase
+    {
+        private readonly ILocationService _locationService;
+        public LocationController(ILocationService locationService)
+        {
+            _locationService = locationService;
+        }
 
-//        // GET: api/Location/5
-//        [HttpGet("{id}", Name = "Get")]
-//        public string Get(int id)
-//        {
-//            return "value";
-//        }
+        [HttpPost]
+        [Route("NewLocation")]
+        public bool NewLocation([FromBody] NewLocation newLocation)
+        {
+            return _locationService.NewLocation(newLocation);
+        }
 
-//        // POST: api/Location
-//        [HttpPost]
-//        public void Post([FromBody] string value)
-//        {
-//        }
 
-//        // PUT: api/Location/5
-//        [HttpPut("{id}")]
-//        public void Put(int id, [FromBody] string value)
-//        {
-//        }
-
-//        // DELETE: api/ApiWithActions/5
-//        [HttpDelete("{id}")]
-//        public void Delete(int id)
-//        {
-//        }
-//    }
-//}
+        [HttpGet]
+        [Route("GetLocations")]
+        public IEnumerable<Locations> GetLocations()
+        {
+            return _locationService.GetLocations();
+        }
+    }
+}
