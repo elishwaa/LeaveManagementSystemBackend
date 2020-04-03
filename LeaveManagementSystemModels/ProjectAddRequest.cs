@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace LeaveManagementSystemModels
 {
-    public class Projects
+    public class ProjectAddRequest
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

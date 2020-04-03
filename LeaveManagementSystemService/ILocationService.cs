@@ -7,7 +7,7 @@ namespace LeaveManagementSystemService
 {
     public interface ILocationService : IService
     {
-        bool NewLocation(NewLocation newLocation);
-        IEnumerable<Locations> GetLocations();
+        bool Add(LocationAddRequest location);
+        IEnumerable<Locations> Get();
     }
 }

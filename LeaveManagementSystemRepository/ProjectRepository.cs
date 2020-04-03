@@ -18,7 +18,7 @@ namespace LeaveManagementSystemRepository
 
         }
 
-        public IEnumerable<Projects> GetProject()
+        public IEnumerable<Projects> Get()
         {
 
             List<Projects> lst = new List<Projects>();
@@ -32,8 +32,8 @@ namespace LeaveManagementSystemRepository
             while (sdr.Read())
             {
                 Projects projects = new Projects();
-                projects.ProjectId = (int)sdr["Id"];
-                projects.ProjectName = sdr["ProjectName"].ToString();
+                projects.Id = (int)sdr["Id"];
+                projects.Name = sdr["ProjectName"].ToString();
 
                 lst.Add(projects);
 
@@ -41,7 +41,7 @@ namespace LeaveManagementSystemRepository
             return lst;
         }
 
-        public bool NewProject(NewProject newProject)
+        public bool Add(ProjectAddRequest addProject)
         {
             try
             {
@@ -50,14 +50,14 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
-                sqlComm.Parameters.AddWithValue("@project", newProject.Project);
+                sqlComm.Parameters.AddWithValue("@project", addProject.Name);
                 sqlComm.ExecuteNonQuery();
                 sqlconn.Close();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 

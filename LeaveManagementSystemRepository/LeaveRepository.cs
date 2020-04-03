@@ -18,7 +18,7 @@ namespace LeaveManagementSystemRepository
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public IEnumerable<LeaveRequestHistory> AllLeaveRequests(int id)
+        public IEnumerable<LeaveRequestHistory> GetAllRequest(int id)
         {
             List<LeaveRequestHistory> lstLeaveRequest = new List<LeaveRequestHistory>();
             SqlConnection sqlconn = new SqlConnection(connectionString);
@@ -46,7 +46,7 @@ namespace LeaveManagementSystemRepository
             return lstLeaveRequest;
         }
 
-        public bool ApproveLeaveRequest(LeaveRequestHistory leave)
+        public bool Approve(LeaveRequestHistory leave)
         {
             try
             {
@@ -75,13 +75,13 @@ namespace LeaveManagementSystemRepository
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public bool AuditProcess(AuditLeaves audit)
+        public bool Audit(AuditLeaves audit)
         {
             try
             {
@@ -96,13 +96,13 @@ namespace LeaveManagementSystemRepository
                 sqlComm.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public bool DeleteRequest(int id)
+        public bool Delete(int id)
         {
             try
             {
@@ -116,13 +116,13 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Close();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public bool EditAndApprove(LeaveRequestHistory leaveRequest)
+        public bool Edit(LeaveRequestHistory leaveRequest)
         {
             try
             {
@@ -141,9 +141,9 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Close();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
@@ -166,7 +166,7 @@ namespace LeaveManagementSystemRepository
             return json;
         }
 
-        public IEnumerable<LeaveRequestHistory> GetLeaveRequests(int id)
+        public IEnumerable<LeaveRequestHistory> GetRequest(int id)
         {
             List<LeaveRequestHistory> lstLeaveRequest = new List<LeaveRequestHistory>();
             SqlConnection sqlconn = new SqlConnection(connectionString);
@@ -194,7 +194,7 @@ namespace LeaveManagementSystemRepository
             return lstLeaveRequest;
         }
 
-        public IEnumerable<Leaves> GetLeaves()
+        public IEnumerable<Leaves> Get()
         {
             List<Leaves> lstLeaves = new List<Leaves>();
 
@@ -215,7 +215,7 @@ namespace LeaveManagementSystemRepository
             return lstLeaves;
         }
 
-        public bool NewLeave(NewLeave newLeave)
+        public bool Add(LeaveAddRequest newLeave)
         {
             try
             {
@@ -231,12 +231,11 @@ namespace LeaveManagementSystemRepository
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                return false;
+                throw e;
             }
         }
 
-        public bool SaveLeaveRequests(LeaveRequest leaverequest)
+        public bool AddRequest(LeaveRequest leaverequest)
         {
             try
             {
@@ -264,15 +263,15 @@ namespace LeaveManagementSystemRepository
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public IEnumerable<Transactions> Transactions(int id)
+        public IEnumerable<LeaveTransactions> Transactions(int id)
         {
-            List<Transactions> lstTransactions = new List<Transactions>();
+            List<LeaveTransactions> lstTransactions = new List<LeaveTransactions>();
 
             SqlConnection sqlconn = new SqlConnection(connectionString);
             SqlCommand sqlComm = new SqlCommand("Transactions");
@@ -284,7 +283,7 @@ namespace LeaveManagementSystemRepository
 
             while (sdr.Read())
             {
-                Transactions transactions = new Transactions();
+                LeaveTransactions transactions = new LeaveTransactions();
                 transactions.EmpId = (int)sdr["Id"];
                 transactions.EmpName = sdr["EmployeeName"].ToString();
                 transactions.LeaveType = sdr["leave"].ToString();
@@ -298,7 +297,7 @@ namespace LeaveManagementSystemRepository
             return lstTransactions;
         }
 
-        public bool UpdateLeaveBalance(List<EmployeeUpdatedLeaveBalance> leaveBalance)
+        public bool EditLeaveBalance(List<EmployeeUpdatedLeaveBalance> leaveBalance)
         {
             try
             {
@@ -319,9 +318,9 @@ namespace LeaveManagementSystemRepository
                 return true;
             }
 
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
     }

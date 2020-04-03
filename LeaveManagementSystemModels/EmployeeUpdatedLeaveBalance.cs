@@ -8,7 +8,7 @@ namespace LeaveManagementSystemModels
     public class EmployeeUpdatedLeaveBalance
     {
         public int EmployeeId { get; set; }
-        public List<UpdatedLeaves> Leaves { get; set; }
+        public List<LeaveUpdations> Leaves { get; set; }
         public int Year { get; set; }
 
 

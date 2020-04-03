@@ -13,6 +13,7 @@ namespace LMSWeb.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
+        private string message;
         private readonly IProjectService _projectService;
         public ProjectController(IProjectService projectService)
         {
@@ -20,19 +21,27 @@ namespace LMSWeb.Controllers
         }
 
         [HttpPost]
-        [Route("NewProject")]
-        public bool NewProject([FromBody] NewProject newProject)
+        [Route("Add")]
+        public IActionResult Add([FromBody] ProjectAddRequest project)
         {
-            return _projectService.NewProject(newProject);
+            try
+            {
+                return Ok(_projectService.Add(project));           
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
+
         }
 
 
         [HttpGet]
-        [Route("GetProjects")]
-        public IEnumerable<Projects> GetProjects()
+        [Route("Get")]
+        public IEnumerable<Projects> Get()
         {
-            return _projectService.GetProject();
-
+            return _projectService.Get();
         }
     }
 }

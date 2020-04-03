@@ -14,14 +14,28 @@ namespace LeaveManagementSystemService
             _locationRepository = locationRepository;
         }
 
-        public IEnumerable<Locations> GetLocations()
+        public IEnumerable<Locations> Get()
         {
-            return _locationRepository.GetLocations();
+            try
+            {
+                return _locationRepository.Get();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public bool NewLocation(NewLocation newLocation)
+        public bool Add(LocationAddRequest location)
         {
-           return  _locationRepository.NewLocation(newLocation);
+            try
+            {
+                return _locationRepository.Add(location);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

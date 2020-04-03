@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class NewLeave
+    public class LeaveAddRequest
     {
         public string Leave { get; set; }
     }

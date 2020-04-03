@@ -7,7 +7,7 @@ namespace LeaveManagementSystemRepository
 {
     public interface ILocationRepository : IRepository
     {
-        bool NewLocation(NewLocation newLocation);
-        IEnumerable<Locations> GetLocations();
+        bool Add(LocationAddRequest location);
+        IEnumerable<Locations> Get();
     }
 }

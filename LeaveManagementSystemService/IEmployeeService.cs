@@ -7,13 +7,13 @@ namespace LeaveManagementSystemService
 {
     public interface IEmployeeService : IService
     {
-        bool ChangePassword(LeaveManagementSystemModels.PasswordChange passwordChange);
-        int ConfirmEmail(string emailId);
-        bool EditEmployeeDetails(Employee employee);
-        IEnumerable<Employee> GetAllEmployees();
-        bool AddEmployee(NewEmployee employee);
-        bool NewDesignation(NewDesignation designation);
+        bool EditPassword(LeaveManagementSystemModels.EmployeePasswordChange passwordChange);
+        int GetEmail(string emailId);
+        bool Edit(Employee employee);
+        IEnumerable<Employee> GetAll();
+        bool Add(EmployeeAddRequest employee);
+        bool AddDesignation(EmployeeAddDesignation designation);
         IEnumerable<Managers> GetManagers();
-        IEnumerable<EmployeeType> GetEmpType();
+        IEnumerable<EmployeeType> GetType();
     }
 }

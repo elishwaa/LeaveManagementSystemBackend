@@ -7,7 +7,7 @@ namespace LeaveManagementSystemService
 {
     public interface IProjectService : IService
     {
-      bool NewProject(NewProject newProject);
-      IEnumerable<Projects> GetProject();
+      bool Add(ProjectAddRequest project);
+      IEnumerable<Projects> Get();
     }
 }

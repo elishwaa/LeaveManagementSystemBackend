@@ -14,14 +14,21 @@ namespace LeaveManagementSystemService
         {
             _projectRepository = projectRepository;
         }
-        public bool NewProject(NewProject newProject)
+        public bool Add(ProjectAddRequest project)
         {
-            return _projectRepository.NewProject(newProject);
+            try
+            {
+                return _projectRepository.Add(project);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public IEnumerable<Projects> GetProject()
+        public IEnumerable<Projects> Get()
         {
-            return _projectRepository.GetProject();
+            return _projectRepository.Get();
         }
     }
 }

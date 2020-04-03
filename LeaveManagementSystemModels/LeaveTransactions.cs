@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class Transactions
+    public class LeaveTransactions
     {
         public int EmpId { get; set; }
         public string EmpName { get; set; }

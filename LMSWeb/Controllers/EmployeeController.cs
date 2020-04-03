@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LeaveManagementSystemModels;
 using LeaveManagementSystemService;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lmsweb.controllers
@@ -11,6 +12,7 @@ namespace lmsweb.controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private string message;
         private  IEmployeeService _employeeService;
         public EmployeeController(IEmployeeService employeeService )
         {
@@ -19,52 +21,92 @@ namespace lmsweb.controllers
 
 
         [HttpGet]
-        [Route("GetEmpType")]
-        public ActionResult<IEnumerable<LeaveManagementSystemModels.EmployeeType>> GetEmpType()
+        [Route("GetType")]
+        public IEnumerable<EmployeeType> GetType()
         {
-            return _employeeService.GetEmpType().ToList();
+            return _employeeService.GetType();
         }
 
         [HttpPost]
-        [Route("ChangePassword")]
-        public bool ChangePassword([FromBody] PasswordChange passwordChange)
+        [Route("EditPassword")]
+        public IActionResult EditPassword([FromBody] EmployeePasswordChange passwordChange)
         {
-            return _employeeService.ChangePassword(passwordChange);
+            try
+            {
+                return Ok( _employeeService.EditPassword(passwordChange));
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpGet]
-        [Route("ConfirmEmail")]
-        public int ConfirmEmail(string emailId)
+        [Route("GetEmail")]
+        public IActionResult GetEmail(string emailId)
         {
-            return _employeeService.ConfirmEmail(emailId);
+            try
+            {
+                return Ok(_employeeService.GetEmail(emailId));
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpPost]
-        [Route("edit")]
-        public bool EditEmployeeDetails(Employee employee)
+        [Route("Edit")]
+        public IActionResult Edit(Employee employee)
         {
-            return _employeeService.EditEmployeeDetails(employee);
+            try
+            {
+                return Ok(_employeeService.Edit(employee));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpGet]
-        [Route("allEmployees")]
+        [Route("GetAll")]
 
-        public ActionResult<IEnumerable<Employee>> GetAllEmployees()
+        public ActionResult<IEnumerable<Employee>> GetAll()
         {
-            return _employeeService.GetAllEmployees().ToList();
+            return _employeeService.GetAll().ToList();
         }
 
         [HttpPost]
-        [Route("AddEmployee")]
-        public bool AddEmployee(NewEmployee employee)
+        [Route("Add")]
+        public IActionResult Add(EmployeeAddRequest employee)
         {
-            return _employeeService.AddEmployee(employee);
+            try
+            {
+                return Ok( _employeeService.Add(employee));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
-        [Route("NewDesignation")]
-        public bool NewDesignation([FromBody] NewDesignation designation)
+        [Route("AddDesignation")]
+        public IActionResult AddDesignation([FromBody] EmployeeAddDesignation designation)
         {
-            return _employeeService.NewDesignation(designation);
+            try
+            {
+                return Ok(_employeeService.AddDesignation(designation));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpGet]

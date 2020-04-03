@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class PasswordChange
+    public class LeaveUpdations
     {
-        public int Id { get; set; }
-        public string Password { get; set; }
+        public int LeaveId { get; set; }
+        public int Value { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class NewDesignation
+    public class EmployeeAddDesignation
     {
         public string Designation { get; set; }
     }

@@ -16,7 +16,7 @@ namespace LeaveManagementSystemRepository
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public bool AddEmployee(NewEmployee employee)
+        public bool Add(EmployeeAddRequest employee)
         {
             try
             {
@@ -47,11 +47,11 @@ namespace LeaveManagementSystemRepository
             }
             catch (Exception e)
             {
-                return false;
+                throw e;
             }
         }
 
-        public bool ChangePassword(PasswordChange passwordChange)
+        public bool EditPassword(EmployeePasswordChange passwordChange)
         {
             try
             {
@@ -66,33 +66,41 @@ namespace LeaveManagementSystemRepository
 
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public int ConfirmEmail(string emailId)
+        public int GetEmail(string emailId)
         {
-            SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetEmployeeByEmail");
-            sqlconn.Open();
-            sqlComm.Connection = sqlconn;
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            sqlComm.Parameters.AddWithValue("@emailId", emailId);
-            SqlDataReader sdr = sqlComm.ExecuteReader();
-            if (sdr.Read())
+            try
             {
-                var employeeId = (int)sdr["Id"];
-                return employeeId;
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("GetEmployeeByEmail");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@emailId", emailId);
+                SqlDataReader sdr = sqlComm.ExecuteReader();
+                if (sdr.Read())
+                {
+                    var employeeId = (int)sdr["Id"];
+                    return employeeId;
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return 0;
+                throw ex;
             }
+           
         }
 
-        public bool EditEmployeeDetails(Employee employee)
+        public bool Edit(Employee employee)
         {
             try
             {
@@ -115,13 +123,13 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Close();
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<Employee> GetAll()
         {
             List<Employee> lstemployee = new List<Employee>();
             SqlConnection sqlconn = new SqlConnection(connectionString);
@@ -161,12 +169,9 @@ namespace LeaveManagementSystemRepository
             return lstemployee;
         }
 
-        public IEnumerable<EmployeeType> GetEmpType()
+        public IEnumerable<EmployeeType> GetType()
         {
             List<EmployeeType> lstEmpType = new List<EmployeeType>();
-
-            //if (HttpContext.Session.GetString(SessionName) != null)
-            //{
 
             SqlConnection sqlconn = new SqlConnection(connectionString);
             SqlCommand sqlComm = new SqlCommand("GetEmployeeType");
@@ -208,7 +213,7 @@ namespace LeaveManagementSystemRepository
             return lstManager;
         }
 
-        public bool NewDesignation(NewDesignation designation)
+        public bool AddDesignation(EmployeeAddDesignation designation)
         {
             try
             {
@@ -224,7 +229,7 @@ namespace LeaveManagementSystemRepository
             }
             catch (Exception e)
             {
-                return false;
+                throw e;
             }
         }
     }

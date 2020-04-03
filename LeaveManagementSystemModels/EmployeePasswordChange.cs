@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class NewProject
+    public class EmployeePasswordChange
     {
-        public string Project { get; set; }
+        public int Id { get; set; }
+        public string Password { get; set; }
     }
 }

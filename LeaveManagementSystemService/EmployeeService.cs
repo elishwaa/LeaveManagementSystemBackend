@@ -15,34 +15,62 @@ namespace LeaveManagementSystemService
             _employeeRepository = employeeRepository;
         }
 
-        public bool AddEmployee(NewEmployee employee)
+        public bool Add(EmployeeAddRequest employee)
         {
-            return _employeeRepository.AddEmployee(employee);
+            try
+            {
+                return _employeeRepository.Add(employee);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public bool ChangePassword(PasswordChange passwordChange)
+        public bool EditPassword(EmployeePasswordChange passwordChange)
         {
-            return _employeeRepository.ChangePassword(passwordChange);
+            try
+            {
+                return _employeeRepository.EditPassword(passwordChange);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public int ConfirmEmail(string emailId)
+        public int GetEmail(string emailId)
         {
-            return _employeeRepository.ConfirmEmail(emailId);
+            try
+            {
+                return _employeeRepository.GetEmail(emailId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public bool EditEmployeeDetails(Employee employee)
+        public bool Edit(Employee employee)
         {
-            return _employeeRepository.EditEmployeeDetails(employee);
+            try
+            {
+                return _employeeRepository.Edit(employee);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<Employee> GetAll()
         {
-            return _employeeRepository.GetAllEmployees();
+            return _employeeRepository.GetAll();
         }
 
-        public IEnumerable<EmployeeType> GetEmpType()
+        public IEnumerable<EmployeeType> GetType()
         {
-            return _employeeRepository.GetEmpType();
+            return _employeeRepository.GetType();
         }
 
         public IEnumerable<Managers> GetManagers()
@@ -50,9 +78,16 @@ namespace LeaveManagementSystemService
             return _employeeRepository.GetManagers();
         }
 
-        public bool NewDesignation(NewDesignation designation)
+        public bool AddDesignation(EmployeeAddDesignation designation)
         {
-            return _employeeRepository.NewDesignation(designation);
+            try
+            {
+                return _employeeRepository.AddDesignation(designation);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

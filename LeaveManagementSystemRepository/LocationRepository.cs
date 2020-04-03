@@ -18,7 +18,7 @@ namespace LeaveManagementSystemRepository
 
         }
 
-        public bool NewLocation(NewLocation newLocation)
+        public bool Add(LocationAddRequest location)
         {
             try
             {
@@ -27,35 +27,43 @@ namespace LeaveManagementSystemRepository
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
-                sqlComm.Parameters.AddWithValue("@location", newLocation.Location);
+                sqlComm.Parameters.AddWithValue("@location", location.Location);
                 sqlComm.ExecuteNonQuery();
                 sqlconn.Close();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public IEnumerable<Locations> GetLocations()
+        public IEnumerable<Locations> Get()
         {
-            List<Locations> lstLocation = new List<Locations>();
-
-            SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetLocations");
-            sqlconn.Open();
-            sqlComm.Connection = sqlconn;
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            SqlDataReader sdr = sqlComm.ExecuteReader();
-            while (sdr.Read())
+            try
             {
-                Locations location = new Locations();
-                location.LocationId = (int)sdr["Id"];
-                location.LocationName = sdr["LName"].ToString();
-                lstLocation.Add(location);
+                List<Locations> lstLocation = new List<Locations>();
+
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("GetLocations");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                SqlDataReader sdr = sqlComm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    Locations location = new Locations();
+                    location.LocationId = (int)sdr["Id"];
+                    location.LocationName = sdr["LName"].ToString();
+                    lstLocation.Add(location);
+                }
+                return lstLocation;
             }
-            return lstLocation;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+           
         }
     }
 }

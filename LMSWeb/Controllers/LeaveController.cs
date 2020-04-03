@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data;
 using Newtonsoft.Json;
 using LeaveManagementSystemService;
+using Microsoft.AspNetCore.Http;
 
 namespace LMSWeb.Controllers
 {
@@ -16,6 +17,7 @@ namespace LMSWeb.Controllers
     public class LeaveController : ControllerBase
     {
         private readonly ILeaveService _leaveService;
+        private string message;
         public LeaveController(ILeaveService leaveService)
         {
             _leaveService = leaveService;
@@ -23,66 +25,106 @@ namespace LMSWeb.Controllers
         
 
         [HttpPost]
-        [Route("SaveLeave")]
-        public bool SaveLeaveRequests(LeaveRequest leaverequest)
+        [Route("AddRequest")]
+        public IActionResult AddRequest(LeaveRequest leaverequest)
         {
-            return _leaveService.SaveLeaveRequests(leaverequest);
+            try
+            {
+                return Ok( _leaveService.AddRequest(leaverequest));
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpGet]
-        [Route("GetLeaveRequests")]
-        public IEnumerable<LeaveRequestHistory> GetLeaveRequests(int id)
+        [Route("GetRequest")]
+        public IEnumerable<LeaveRequestHistory> GetRequest(int id)
         {
-            return _leaveService.GetLeaveRequests(id);
+            return _leaveService.GetRequest(id);
         }
 
         [HttpGet]
-        [Route("allLeaveRequests")]
-        public IEnumerable<LeaveRequestHistory> AllLeaveRequests(int id)
+        [Route("GetAll")]
+        public IEnumerable<LeaveRequestHistory> GetAllRequest(int id)
         {
-            return _leaveService.AllLeaveRequests(id);
+            return _leaveService.GetAllRequest(id);
         }
 
         [HttpDelete]
-        [Route("delete")]
-        public bool DeleteRequest(int id)
+        [Route("Delete")]
+        public IActionResult Delete(int id)
         {
-            return _leaveService.DeleteRequest(id);
+            try
+            {
+                return Ok(_leaveService.Delete(id));
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpPost]
-        [Route("EditAndApprove")]
-        public bool EditAndApprove(LeaveRequestHistory leaveRequest)
+        [Route("Edit")]
+        public IActionResult Edit(LeaveRequestHistory leaveRequest)
         {
-            return _leaveService.EditAndApprove(leaveRequest);
+            try
+            {
+                return Ok(_leaveService.Edit(leaveRequest));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
 
         }
         [HttpPost]
         [Route("Approve")]
-        public bool ApproveLeaveRequest(LeaveRequestHistory leave)
+        public IActionResult Approve(LeaveRequestHistory leave)
         {
-            return _leaveService.ApproveLeaveRequest(leave);
+            try
+            {
+                return Ok( _leaveService.Approve(leave));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpPost]
-        [Route("NewLeave")]
-        public bool NewLeave([FromBody] NewLeave newLeave)
+        [Route("Add")]
+        public IActionResult Add([FromBody] LeaveAddRequest newLeave)
         {
-            return _leaveService.NewLeave(newLeave);
+            try
+            {
+                return Ok( _leaveService.Add(newLeave));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpGet]
         [Route("Transactions")]
-        public IEnumerable<Transactions> Transactions(int id)
+        public IEnumerable<LeaveTransactions> Transactions(int id)
         {
             return _leaveService.Transactions(id);
         }
 
         [HttpGet]
-        [Route("GetLeaves")]
-        public IEnumerable<Leaves> GetLeaves()
+        [Route("Get")]
+        public IEnumerable<Leaves> Get()
         {
-            return _leaveService.GetLeaves();
+            return _leaveService.Get();
         }
 
         [HttpGet]
@@ -93,18 +135,34 @@ namespace LMSWeb.Controllers
         }
 
         [HttpPost]
-        [Route("audit")]
-        public bool AuditProcess(AuditLeaves audit)
+        [Route("Audit")]
+        public IActionResult Audit(AuditLeaves audit)
         {
-            return _leaveService.AuditProcess(audit);
+            try
+            {
+                return Ok( _leaveService.Audit(audit));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpPost]
-        [Route("editLeaveBalance")]
+        [Route("EditLeaveBalance")]
 
-        public bool UpdateLeaveBalance([FromBody] List<EmployeeUpdatedLeaveBalance> leaveBalance)
+        public IActionResult EditLeaveBalance([FromBody] List<EmployeeUpdatedLeaveBalance> leaveBalance)
         {
-            return _leaveService.UpdateLeaveBalance(leaveBalance);
+            try
+            {
+                return Ok( _leaveService.EditLeaveBalance(leaveBalance));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
     }

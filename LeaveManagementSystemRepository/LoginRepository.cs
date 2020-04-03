@@ -24,7 +24,7 @@ namespace LeaveManagementSystemRepository
         }
 
 
-        public Employee GetLogin(LoginDetails loginDetails)
+        public Employee Get(LoginDetails loginDetails)
         {
             try
             {
@@ -63,30 +63,28 @@ namespace LeaveManagementSystemRepository
                         employee.LocationId = (int)datareader["Locationid"];
                         employee.LocationName = datareader["Lname"].ToString();
                     }
-                    //HttpContext.Session.SetString(SessionName, employee.Username)
-                    
                 }
                 return employee;
             }
-            catch (Exception e)
+            catch(Exception ex)
             {
-                return null;
+                throw ex;
             }
          
         }
 
-        public bool NewLogin(NewLogin newLogin)
+        public bool Login(Login login)
         {
-            //if (HttpContext.Session.GetString(SessionName) == null)
-            //{
-                var encryptedPassword = Encrypt(newLogin.Password, "sblw-3hn8-sqoy19");
+            try
+            {
+                var encryptedPassword = Encrypt(login.Password, "sblw-3hn8-sqoy19");
                 SqlConnection sqlconn = new SqlConnection(connectionString);
                 SqlCommand sqlComm = new SqlCommand("NewLogin");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
-                sqlComm.Parameters.AddWithValue("@employeeId", newLogin.EmployeeId);
-                sqlComm.Parameters.AddWithValue("@username", newLogin.Username);
+                sqlComm.Parameters.AddWithValue("@employeeId", login.EmployeeId);
+                sqlComm.Parameters.AddWithValue("@username", login.Username);
                 sqlComm.Parameters.AddWithValue("@password", encryptedPassword);
 
                 SqlParameter returnParameter = sqlComm.Parameters.Add("RetVal", SqlDbType.Int);
@@ -102,8 +100,14 @@ namespace LeaveManagementSystemRepository
                 {
                     returnValue = true;
                 }
-           
-            return returnValue;
+
+                return returnValue;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
         public static string Encrypt(string input, string key)
         {

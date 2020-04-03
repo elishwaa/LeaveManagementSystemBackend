@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class NewLogin
+    public class Login
     {
         public int EmployeeId { get; set; }
         public string Username { get; set; }

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using LeaveManagementSystemService;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace LMSWeb.Controllers
 {
@@ -19,18 +21,33 @@ namespace LMSWeb.Controllers
         }
 
         [HttpPost]
-        [Route("GetLogin")]
-        public ActionResult<LeaveManagementSystemModels.Employee> GetLogin(LeaveManagementSystemModels.LoginDetails loginDetails)
+        [Route("Get")]
+        public ActionResult<LeaveManagementSystemModels.Employee> Get(LeaveManagementSystemModels.LoginDetails loginDetails)
         {
-            var employee = _loginService.GetLogin(loginDetails);
-            return employee;
+            try
+            {
+                return Ok(_loginService.Get(loginDetails));
+            }
+            catch(Exception ex)
+            {
+                var message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpPost]
-        [Route("newLogin")]
-        public bool NewLogin([FromBody] LeaveManagementSystemModels.NewLogin newLogin)
-        {   
-            return _loginService.NewLogin(newLogin);
+        [Route("Login")]
+        public IActionResult Add([FromBody] LeaveManagementSystemModels.Login login)
+        {
+            try
+            {
+                return Ok(_loginService.Login(login));
+            }
+            catch(Exception ex)
+            {
+                var message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
     }
 }

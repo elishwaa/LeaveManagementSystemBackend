@@ -13,6 +13,7 @@ namespace LMSWeb.Controllers
     [ApiController]
     public class LocationController : ControllerBase
     {
+        private string message;
         private readonly ILocationService _locationService;
         public LocationController(ILocationService locationService)
         {
@@ -20,18 +21,33 @@ namespace LMSWeb.Controllers
         }
 
         [HttpPost]
-        [Route("NewLocation")]
-        public bool NewLocation([FromBody] NewLocation newLocation)
+        [Route("Add")]
+        public IActionResult Add([FromBody] LocationAddRequest location)
         {
-            return _locationService.NewLocation(newLocation);
+            try
+            {
+                return Ok(_locationService.Add(location));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
 
         [HttpGet]
-        [Route("GetLocations")]
-        public IEnumerable<Locations> GetLocations()
+        [Route("Get")]
+        public IEnumerable<Locations> Get()
         {
-            return _locationService.GetLocations();
+            //try
+            //{
+                return _locationService.Get();
+            //}
+            //catch(Exception ex) {
+            //    message = ex.Message;
+            //    return BadRequest(message);
+            //}
         }
     }
 }

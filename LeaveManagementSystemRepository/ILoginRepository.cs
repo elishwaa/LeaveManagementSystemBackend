@@ -7,7 +7,7 @@ namespace LeaveManagementSystemRepository
 {
     public interface ILoginRepository :IRepository
     {
-        Employee GetLogin(LoginDetails loginDetails);
-        bool NewLogin(NewLogin newLogin);
+        Employee Get(LoginDetails loginDetails);
+        bool Login(Login login);
     }
 }

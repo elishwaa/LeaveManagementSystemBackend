@@ -15,29 +15,57 @@ namespace LeaveManagementSystemService
             _leaveRepository = leaveRepository;
         }
 
-        public IEnumerable<LeaveRequestHistory> AllLeaveRequests(int id)
+        public IEnumerable<LeaveRequestHistory> GetAllRequest(int id)
         {
-            return _leaveRepository.AllLeaveRequests(id);
+            return _leaveRepository.GetAllRequest(id);
         }
 
-        public bool ApproveLeaveRequest(LeaveRequestHistory leave)
+        public bool Approve(LeaveRequestHistory leave)
         {
-            return _leaveRepository.ApproveLeaveRequest(leave);
+            try
+            {
+                return _leaveRepository.Approve(leave);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public bool AuditProcess(AuditLeaves audit)
+        public bool Audit(AuditLeaves audit)
         {
-            return _leaveRepository.AuditProcess(audit);
+            try
+            {
+                return _leaveRepository.Audit(audit);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public bool DeleteRequest(int id)
+        public bool Delete(int id)
         {
-            return _leaveRepository.DeleteRequest(id);
+            try
+            {
+                return _leaveRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public bool EditAndApprove(LeaveRequestHistory leaveRequest)
+        public bool Edit(LeaveRequestHistory leaveRequest)
         {
-            return _leaveRepository.EditAndApprove(leaveRequest);
+            try
+            {
+                return _leaveRepository.Edit(leaveRequest);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public string GetLeaveBalance(int id)
@@ -45,34 +73,55 @@ namespace LeaveManagementSystemService
             return _leaveRepository.GetLeaveBalance(id);
         }
 
-        public IEnumerable<LeaveRequestHistory> GetLeaveRequests(int id)
+        public IEnumerable<LeaveRequestHistory> GetRequest(int id)
         {
-            return _leaveRepository.GetLeaveRequests(id);
+            return _leaveRepository.GetRequest(id);
         }
 
-        public IEnumerable<Leaves> GetLeaves()
+        public IEnumerable<Leaves> Get()
         {
-            return _leaveRepository.GetLeaves();
+            return _leaveRepository.Get();
         }
 
-        public bool NewLeave(NewLeave newLeave)
+        public bool Add(LeaveAddRequest newLeave)
         {
-            return _leaveRepository.NewLeave(newLeave);
+            try
+            {
+                return _leaveRepository.Add(newLeave);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public bool SaveLeaveRequests(LeaveRequest leaverequest)
+        public bool AddRequest(LeaveRequest leaverequest)
         {
-            return _leaveRepository.SaveLeaveRequests(leaverequest);
+            try
+            {
+                return _leaveRepository.AddRequest(leaverequest);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public IEnumerable<Transactions> Transactions(int id)
+        public IEnumerable<LeaveTransactions> Transactions(int id)
         {
             return _leaveRepository.Transactions(id);
         }
 
-        public bool UpdateLeaveBalance(List<EmployeeUpdatedLeaveBalance> leaveBalance)
+        public bool EditLeaveBalance(List<EmployeeUpdatedLeaveBalance> leaveBalance)
         {
-            return _leaveRepository.UpdateLeaveBalance(leaveBalance);
+            try
+            {
+                return _leaveRepository.EditLeaveBalance(leaveBalance);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

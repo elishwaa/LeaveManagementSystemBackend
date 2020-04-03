@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class NewEmployee
+    public class EmployeeAddRequest
     {
         public int EmpType { get; set; }
         public string FirstName { get; set; }

@@ -16,21 +16,28 @@ namespace LeaveManagementSystemService
             _loginRepository = loginRepository;
         }
 
-        public Employee GetLogin(LoginDetails loginDetails )
+        public Employee Get(LoginDetails loginDetails )
         {
             try
             {
-                return _loginRepository.GetLogin(loginDetails);
+                return _loginRepository.Get(loginDetails);
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
-                return null;
+                throw ex;
             }
 
         }
-        public bool NewLogin(NewLogin newLogin)
+        public bool Login(Login login)
         {
-            return _loginRepository.NewLogin(newLogin);
+            try
+            {
+                return _loginRepository.Login(login);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace LeaveManagementSystemService
 {
     public interface ILoginService : IService
     {
-      Employee GetLogin(LoginDetails loginDetails);
-      bool NewLogin(NewLogin newLogin);
+      Employee Get(LoginDetails loginDetails);
+      bool Login(Login login);
     }
 }

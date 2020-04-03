@@ -7,17 +7,17 @@ namespace LeaveManagementSystemService
 {
     public interface ILeaveService : IService
     {
-        bool SaveLeaveRequests(LeaveRequest leaverequest);
-        IEnumerable<LeaveRequestHistory> GetLeaveRequests(int id);
-        IEnumerable<LeaveRequestHistory> AllLeaveRequests(int id);
-        bool DeleteRequest(int id);
-        bool EditAndApprove(LeaveRequestHistory leaveRequest);
-        bool ApproveLeaveRequest(LeaveRequestHistory leave);
-        bool NewLeave(NewLeave newLeave);
-        IEnumerable<Transactions> Transactions(int id);
-        IEnumerable<Leaves> GetLeaves();
+        bool AddRequest(LeaveRequest leaverequest);
+        IEnumerable<LeaveRequestHistory> GetRequest(int id);
+        IEnumerable<LeaveRequestHistory> GetAllRequest(int id);
+        bool Delete(int id);
+        bool Edit(LeaveRequestHistory leaveRequest);
+        bool Approve(LeaveRequestHistory leave);
+        bool Add(LeaveAddRequest newLeave);
+        IEnumerable<LeaveTransactions> Transactions(int id);
+        IEnumerable<Leaves> Get();
         string GetLeaveBalance(int id);
-        bool AuditProcess(AuditLeaves audit);
-        bool UpdateLeaveBalance(List<EmployeeUpdatedLeaveBalance> leaveBalance);
+        bool Audit(AuditLeaves audit);
+        bool EditLeaveBalance(List<EmployeeUpdatedLeaveBalance> leaveBalance);
     }
 }

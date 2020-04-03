@@ -7,7 +7,7 @@ namespace LeaveManagementSystemRepository
 {
     public interface IProjectRepository : IRepository
     {
-        bool NewProject(NewProject newProject);
-        IEnumerable<Projects> GetProject();
+        bool Add(ProjectAddRequest project);
+        IEnumerable<Projects> Get();
     }
 }

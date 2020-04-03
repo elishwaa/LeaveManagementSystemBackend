@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace LeaveManagementSystemModels
 {
-    public class UpdatedLeaves
+    public class LocationAddRequest
     {
-        public int LeaveId { get; set; }
-        public int Value { get; set; }
+        public string Location { get; set; }
+
     }
 }
