@@ -31,8 +31,8 @@ namespace LeaveManagementSystemRepository
                 sqlComm.Parameters.AddWithValue("@lastName", employee.LastName.ToString());
                 sqlComm.Parameters.AddWithValue("@email", employee.Email.ToString());
                 sqlComm.Parameters.AddWithValue("@salary", employee.Salary);
-                sqlComm.Parameters.AddWithValue("@project", employee.Project);
                 sqlComm.Parameters.AddWithValue("@locationId", employee.Location);
+                sqlComm.Parameters.AddWithValue("@project", employee.Project);
                 sqlComm.ExecuteNonQuery();
 
                 SqlCommand sqlCommand = new SqlCommand("AddToManagement");
@@ -152,25 +152,17 @@ namespace LeaveManagementSystemRepository
                 employee.LocationId = (int)sdr["LocationId"];
                 employee.LocationName = sdr["LName"].ToString();
                 employee.ManagerId = (int)sdr["ManagerId"];
-                employee.ManagerName = sdr["Manager"].ToString();   
-                if ( sdr["ProjectId"] != DBNull.Value && sdr["ProjectName"] != DBNull.Value)
-                {   
-                    employee.ProjectId = (int)sdr["ProjectId"];
-                    employee.ProjectName = sdr["ProjectName"].ToString();
-                }
-                else
-                {
-                   
-                    employee.ProjectId = 0;
-                    employee.ProjectName = null;
-                }
+                employee.ManagerName = sdr["Manager"].ToString();
+                employee.ProjectId = (int)sdr["ProjectId"];
+                employee.ProjectName = sdr["ProjectName"].ToString();
+               
                 if (sdr["Username"] != DBNull.Value)
                 {
                     employee.Username = sdr["Username"].ToString();
                 }
                 else
                 {
-                    employee.Username = null;
+                    employee.Username = "not-assigned";
                 }
                 lstemployee.Add(employee);
             }
