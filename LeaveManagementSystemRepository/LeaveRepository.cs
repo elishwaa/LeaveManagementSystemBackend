@@ -22,7 +22,7 @@ namespace LeaveManagementSystemRepository
         {
             List<LeaveRequestHistory> lstLeaveRequest = new List<LeaveRequestHistory>();
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("AllLeaveRequests");
+            SqlCommand sqlComm = new SqlCommand("allLeaveRequests");
             sqlconn.Open();
             sqlComm.Connection = sqlconn;
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -51,7 +51,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("ApproveLeaveRequest");
+                SqlCommand sqlComm = new SqlCommand("approveLeaveRequest");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -86,7 +86,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("AuditLeaves");
+                SqlCommand sqlComm = new SqlCommand("auditLeaves");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -107,7 +107,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("DeleteRequest");
+                SqlCommand sqlComm = new SqlCommand("deleteRequest");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -127,7 +127,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("EditAndApprove");
+                SqlCommand sqlComm = new SqlCommand("editAndApprove");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -153,7 +153,7 @@ namespace LeaveManagementSystemRepository
             SqlDataAdapter dataAdapter = new SqlDataAdapter();
             DataSet dataset = new DataSet();
             sqlconn.Open();
-            SqlCommand sqlComm = new SqlCommand("GetLeaveBalance", sqlconn);
+            SqlCommand sqlComm = new SqlCommand("getLeaveBalance", sqlconn);
             sqlComm.Parameters.Add(new SqlParameter("@id", id));
             sqlComm.CommandType = CommandType.StoredProcedure;
             dataAdapter.SelectCommand = sqlComm;
@@ -170,7 +170,7 @@ namespace LeaveManagementSystemRepository
         {
             List<LeaveRequestHistory> lstLeaveRequest = new List<LeaveRequestHistory>();
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetLeaveRequests");
+            SqlCommand sqlComm = new SqlCommand("getLeaveRequests");
             sqlconn.Open();
             sqlComm.Connection = sqlconn;
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -199,7 +199,7 @@ namespace LeaveManagementSystemRepository
             List<Leaves> lstLeaves = new List<Leaves>();
 
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetLeaves");
+            SqlCommand sqlComm = new SqlCommand("getLeaves");
             sqlconn.Open();
             sqlComm.Connection = sqlconn;
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -220,7 +220,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("NewLeave");
+                SqlCommand sqlComm = new SqlCommand("newLeave");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -240,7 +240,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("LeaveRequest");
+                SqlCommand sqlComm = new SqlCommand("leaveRequest");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -274,7 +274,7 @@ namespace LeaveManagementSystemRepository
             List<LeaveTransactions> lstTransactions = new List<LeaveTransactions>();
 
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("Transactions");
+            SqlCommand sqlComm = new SqlCommand("transactions");
             sqlconn.Open();
             sqlComm.Connection = sqlconn;
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -304,7 +304,7 @@ namespace LeaveManagementSystemRepository
                 foreach (var i in leaveBalance[0].Leaves)
                 {
                     SqlConnection sqlconn = new SqlConnection(connectionString);
-                    SqlCommand sqlComm = new SqlCommand("UpdateLeaveBalance");
+                    SqlCommand sqlComm = new SqlCommand("updateLeaveBalance");
                     sqlconn.Open();
                     sqlComm.Connection = sqlconn;
                     sqlComm.CommandType = CommandType.StoredProcedure;

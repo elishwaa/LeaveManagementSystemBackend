@@ -23,7 +23,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("NewLocation");
+                SqlCommand sqlComm = new SqlCommand("newLocation");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -45,7 +45,7 @@ namespace LeaveManagementSystemRepository
                 List<Locations> lstLocation = new List<Locations>();
 
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("GetLocations");
+                SqlCommand sqlComm = new SqlCommand("getLocations");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;

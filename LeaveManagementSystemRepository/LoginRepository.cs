@@ -32,7 +32,7 @@ namespace LeaveManagementSystemRepository
                 Employee employee = new Employee();
 
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlcomm = new SqlCommand("LoginValidation");
+                SqlCommand sqlcomm = new SqlCommand("loginValidation");
                 sqlconn.Open();
                 sqlcomm.Connection = sqlconn;
                 sqlcomm.CommandType = CommandType.StoredProcedure;
@@ -44,7 +44,7 @@ namespace LeaveManagementSystemRepository
                 {
                     employee.Id = (int)sdr["id"];
                     sdr.Close();
-                    SqlCommand sqlcom = new SqlCommand("EmployeeDetails");
+                    SqlCommand sqlcom = new SqlCommand("employeeDetails");
                     sqlcom.Connection = sqlconn;
                     sqlcom.CommandType = CommandType.StoredProcedure;
                     sqlcom.Parameters.AddWithValue("@employeeid", employee.Id);
@@ -79,7 +79,7 @@ namespace LeaveManagementSystemRepository
             {
                 var encryptedPassword = Encrypt(login.Password, "sblw-3hn8-sqoy19");
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("NewLogin");
+                SqlCommand sqlComm = new SqlCommand("newLogin");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;

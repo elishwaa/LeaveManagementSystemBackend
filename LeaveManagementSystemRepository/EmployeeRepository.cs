@@ -21,7 +21,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("AddEmployee");
+                SqlCommand sqlComm = new SqlCommand("addEmployee");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -35,7 +35,7 @@ namespace LeaveManagementSystemRepository
                 sqlComm.Parameters.AddWithValue("@project", employee.Project);
                 sqlComm.ExecuteNonQuery();
 
-                SqlCommand sqlCommand = new SqlCommand("AddToManagement");
+                SqlCommand sqlCommand = new SqlCommand("addToManagement");
                 sqlCommand.Connection = sqlconn;
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@manager", employee.Manager);
@@ -56,7 +56,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("UpdatePassword");
+                SqlCommand sqlComm = new SqlCommand("updatePassword");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -77,7 +77,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("GetEmployeeByEmail");
+                SqlCommand sqlComm = new SqlCommand("getEmployeeByEmail");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -105,7 +105,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("EditEmployeeDetails");
+                SqlCommand sqlComm = new SqlCommand("editEmployeeDetails");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
@@ -133,7 +133,7 @@ namespace LeaveManagementSystemRepository
         {
             List<Employee> lstemployee = new List<Employee>();
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlCom = new SqlCommand("AllEmployees");
+            SqlCommand sqlCom = new SqlCommand("allEmployees");
             sqlconn.Open();
             sqlCom.Connection = sqlconn;
             sqlCom.CommandType = CommandType.StoredProcedure;
@@ -175,7 +175,7 @@ namespace LeaveManagementSystemRepository
             List<EmployeeType> lstEmpType = new List<EmployeeType>();
 
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetEmployeeType");
+            SqlCommand sqlComm = new SqlCommand("getEmployeeType");
             sqlconn.Open();
             sqlComm.Connection = sqlconn;
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -197,7 +197,7 @@ namespace LeaveManagementSystemRepository
             List<Managers> lstManager = new List<Managers>();
 
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetManagers");
+            SqlCommand sqlComm = new SqlCommand("getManagers");
             sqlconn.Open();
             sqlComm.Connection = sqlconn;
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -219,7 +219,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("NewDesignation");
+                SqlCommand sqlComm = new SqlCommand("newDesignation");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;

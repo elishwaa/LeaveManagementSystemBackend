@@ -24,7 +24,7 @@ namespace LeaveManagementSystemRepository
             List<Projects> lst = new List<Projects>();
 
             SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("GetProjects");
+            SqlCommand sqlComm = new SqlCommand("getProjects");
             sqlconn.Open();
             sqlComm.Connection = sqlconn;
             sqlComm.CommandType = CommandType.StoredProcedure;
@@ -46,7 +46,7 @@ namespace LeaveManagementSystemRepository
             try
             {
                 SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("NewProject");
+                SqlCommand sqlComm = new SqlCommand("newProject");
                 sqlconn.Open();
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
