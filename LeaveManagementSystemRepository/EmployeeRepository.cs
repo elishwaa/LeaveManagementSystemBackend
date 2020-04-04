@@ -35,7 +35,7 @@ namespace LeaveManagementSystemRepository
                 sqlComm.Parameters.AddWithValue("@project", employee.Project);
                 sqlComm.ExecuteNonQuery();
 
-                SqlCommand sqlCommand = new SqlCommand("addToManagement");
+                SqlCommand sqlCommand = new SqlCommand("addOtherEmployeeDetails");
                 sqlCommand.Connection = sqlconn;
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@manager", employee.Manager);
