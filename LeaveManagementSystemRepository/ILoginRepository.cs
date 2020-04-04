@@ -9,5 +9,6 @@ namespace LeaveManagementSystemRepository
     {
         Employee Get(LoginDetails loginDetails);
         bool Login(Login login);
+        bool EditPassword(EmployeePasswordChange passwordChange);
     }
 }

@@ -9,5 +9,6 @@ namespace LeaveManagementSystemService
     {
       Employee Get(LoginDetails loginDetails);
       bool Login(Login login);
+      bool EditPassword(LeaveManagementSystemModels.EmployeePasswordChange passwordChange);
     }
 }

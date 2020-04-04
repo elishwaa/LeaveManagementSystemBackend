@@ -7,7 +7,7 @@ namespace LeaveManagementSystemService
 {
     public interface IEmployeeService : IService
     {
-        bool EditPassword(LeaveManagementSystemModels.EmployeePasswordChange passwordChange);
+        
         int GetEmail(string emailId);
         bool Edit(Employee employee);
         IEnumerable<Employee> GetAll();

@@ -27,20 +27,7 @@ namespace lmsweb.controllers
             return _employeeService.GetType();
         }
 
-        [HttpPost]
-        [Route("EditPassword")]
-        public IActionResult EditPassword([FromBody] EmployeePasswordChange passwordChange)
-        {
-            try
-            {
-                return Ok( _employeeService.EditPassword(passwordChange));
-            }
-            catch(Exception ex)
-            {
-                message = ex.Message;
-                return StatusCode(StatusCodes.Status500InternalServerError, message);
-            }
-        }
+        
 
         [HttpGet]
         [Route("GetEmail")]

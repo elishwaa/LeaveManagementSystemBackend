@@ -39,5 +39,17 @@ namespace LeaveManagementSystemService
                 throw ex;
             }
         }
+
+        public bool EditPassword(EmployeePasswordChange passwordChange)
+        {
+            try
+            {
+                return _loginRepository.EditPassword(passwordChange);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -27,17 +27,6 @@ namespace LeaveManagementSystemService
             }
         }
 
-        public bool EditPassword(EmployeePasswordChange passwordChange)
-        {
-            try
-            {
-                return _employeeRepository.EditPassword(passwordChange);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
         public int GetEmail(string emailId)
         {

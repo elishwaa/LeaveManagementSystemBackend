@@ -92,9 +92,9 @@ namespace LeaveManagementSystemRepository
                 sqlComm.ExecuteNonQuery();
 
                 int id = (int)returnParameter.Value;
-                if (id == 0)
+                if (id != 0)
                 {
-                    returnValue = false;
+                    returnValue = true;
                 }
                 else
                 {
@@ -109,6 +109,28 @@ namespace LeaveManagementSystemRepository
             }
             
         }
+
+        public bool EditPassword(EmployeePasswordChange passwordChange)
+        {
+            try
+            {
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("updatePassword");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                sqlComm.Parameters.AddWithValue("@empId", passwordChange.Id);
+                sqlComm.Parameters.AddWithValue("@newPassword", passwordChange.Password);
+                sqlComm.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static string Encrypt(string input, string key)
         {
             byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);

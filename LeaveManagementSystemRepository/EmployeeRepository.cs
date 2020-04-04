@@ -50,27 +50,7 @@ namespace LeaveManagementSystemRepository
                 throw e;
             }
         }
-
-        public bool EditPassword(EmployeePasswordChange passwordChange)
-        {
-            try
-            {
-                SqlConnection sqlconn = new SqlConnection(connectionString);
-                SqlCommand sqlComm = new SqlCommand("updatePassword");
-                sqlconn.Open();
-                sqlComm.Connection = sqlconn;
-                sqlComm.CommandType = CommandType.StoredProcedure;
-                sqlComm.Parameters.AddWithValue("@empId", passwordChange.Id);
-                sqlComm.Parameters.AddWithValue("@newPassword", passwordChange.Password);
-                sqlComm.ExecuteNonQuery();
-
-                return true;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
+       
 
         public int GetEmail(string emailId)
         {
