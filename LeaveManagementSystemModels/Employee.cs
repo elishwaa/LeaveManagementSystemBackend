@@ -8,8 +8,6 @@ namespace LeaveManagementSystemModels
     public class Employee
     {
         public int typeid;
-        public object id;
-
         public int Id { get; set; }
         public int TypeId { get; set; }
         public string TypeName { get; set; }
@@ -23,5 +21,7 @@ namespace LeaveManagementSystemModels
         public string ProjectName { get; set; }
         public int LocationId { get; set; }
         public string LocationName { get; set; }
+        public int ManagerId { get; set; }
+        public string ManagerName { get; set; }
     }
 }

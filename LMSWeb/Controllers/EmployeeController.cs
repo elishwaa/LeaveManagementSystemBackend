@@ -111,9 +111,9 @@ namespace lmsweb.controllers
 
         [HttpGet]
         [Route("GetManagers")]
-        public ActionResult<IEnumerable<Managers>> GetManagers()
+        public IEnumerable<Managers> GetManagers()
         {
-            return _employeeService.GetManagers().ToList(); 
+            return _employeeService.GetManagers(); 
         }
 
     }

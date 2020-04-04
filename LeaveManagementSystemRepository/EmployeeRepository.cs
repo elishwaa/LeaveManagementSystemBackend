@@ -151,17 +151,26 @@ namespace LeaveManagementSystemRepository
                 employee.Salary = (int)sdr["Salary "];
                 employee.LocationId = (int)sdr["LocationId"];
                 employee.LocationName = sdr["LName"].ToString();
-                if (sdr["Username"] != DBNull.Value && sdr["ProjectId"] != DBNull.Value && sdr["ProjectName"] != DBNull.Value)
-                {
-                    employee.Username = sdr["Username"].ToString();
+                employee.ManagerId = (int)sdr["ManagerId"];
+                employee.ManagerName = sdr["Manager"].ToString();   
+                if ( sdr["ProjectId"] != DBNull.Value && sdr["ProjectName"] != DBNull.Value)
+                {   
                     employee.ProjectId = (int)sdr["ProjectId"];
                     employee.ProjectName = sdr["ProjectName"].ToString();
                 }
                 else
                 {
-                    employee.Username = null;
+                   
                     employee.ProjectId = 0;
                     employee.ProjectName = null;
+                }
+                if (sdr["Username"] != DBNull.Value)
+                {
+                    employee.Username = sdr["Username"].ToString();
+                }
+                else
+                {
+                    employee.Username = null;
                 }
                 lstemployee.Add(employee);
             }
