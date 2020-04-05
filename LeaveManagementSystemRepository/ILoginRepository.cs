@@ -8,7 +8,7 @@ namespace LeaveManagementSystemRepository
     public interface ILoginRepository :IRepository
     {
         Employee Get(LoginDetails loginDetails);
-        bool Login(Login login);
+        bool Add(Login login);
         bool EditPassword(EmployeePasswordChange passwordChange);
     }
 }

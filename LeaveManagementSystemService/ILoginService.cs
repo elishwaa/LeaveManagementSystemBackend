@@ -8,7 +8,7 @@ namespace LeaveManagementSystemService
     public interface ILoginService : IService
     {
       Employee Get(LoginDetails loginDetails);
-      bool Login(Login login);
+      bool Add(Login login);
       bool EditPassword(LeaveManagementSystemModels.EmployeePasswordChange passwordChange);
     }
 }

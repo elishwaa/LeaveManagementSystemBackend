@@ -40,14 +40,7 @@ namespace LMSWeb.Controllers
         [Route("Get")]
         public IEnumerable<Locations> Get()
         {
-            //try
-            //{
-                return _locationService.Get();
-            //}
-            //catch(Exception ex) {
-            //    message = ex.Message;
-            //    return BadRequest(message);
-            //}
+            return _locationService.Get();
         }
     }
 }

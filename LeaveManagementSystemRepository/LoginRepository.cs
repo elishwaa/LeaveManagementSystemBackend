@@ -28,7 +28,6 @@ namespace LeaveManagementSystemRepository
         {
             try
             {
-                var encryptedPassword = Encrypt(loginDetails.Password, "sblw-3hn8-sqoy19");
                 Employee employee = new Employee();
 
                 SqlConnection sqlconn = new SqlConnection(connectionString);
@@ -37,7 +36,7 @@ namespace LeaveManagementSystemRepository
                 sqlcomm.Connection = sqlconn;
                 sqlcomm.CommandType = CommandType.StoredProcedure;
                 sqlcomm.Parameters.AddWithValue("@Username", loginDetails.Username);
-                sqlcomm.Parameters.AddWithValue("@Password", encryptedPassword);
+                sqlcomm.Parameters.AddWithValue("@Password", loginDetails.Password);
                 SqlDataReader sdr = sqlcomm.ExecuteReader();
 
                 if (sdr.Read())
@@ -73,11 +72,10 @@ namespace LeaveManagementSystemRepository
          
         }
 
-        public bool Login(Login login)
+        public bool Add(Login login)
         {
             try
             {
-                var encryptedPassword = Encrypt(login.Password, "sblw-3hn8-sqoy19");
                 SqlConnection sqlconn = new SqlConnection(connectionString);
                 SqlCommand sqlComm = new SqlCommand("newLogin");
                 sqlconn.Open();
@@ -85,7 +83,7 @@ namespace LeaveManagementSystemRepository
                 sqlComm.CommandType = CommandType.StoredProcedure;
                 sqlComm.Parameters.AddWithValue("@employeeId", login.EmployeeId);
                 sqlComm.Parameters.AddWithValue("@username", login.Username);
-                sqlComm.Parameters.AddWithValue("@password", encryptedPassword);
+                sqlComm.Parameters.AddWithValue("@password", login.Password);
 
                 SqlParameter returnParameter = sqlComm.Parameters.Add("RetVal", SqlDbType.Int);
                 returnParameter.Direction = ParameterDirection.ReturnValue;
@@ -131,18 +129,7 @@ namespace LeaveManagementSystemRepository
             }
         }
 
-        public static string Encrypt(string input, string key)
-        {
-            byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
-            TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
-            tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
-            tripleDES.Mode = CipherMode.ECB;
-            tripleDES.Padding = PaddingMode.PKCS7;
-            ICryptoTransform cTransform = tripleDES.CreateEncryptor();
-            byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
-            tripleDES.Clear();
-            return Convert.ToBase64String(resultArray, 0, resultArray.Length);
-        }
+       
        
     }
 }

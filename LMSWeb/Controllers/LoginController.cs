@@ -38,12 +38,12 @@ namespace LMSWeb.Controllers
         }
 
         [HttpPost]
-        [Route("Login")]
+        [Route("Add")]
         public IActionResult Add([FromBody] LeaveManagementSystemModels.Login login)
         {
             try
             {
-                return Ok(_loginService.Login(login));
+                return Ok(_loginService.Add(login));
             }
             catch(Exception ex)
             {
