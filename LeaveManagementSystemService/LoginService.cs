@@ -47,6 +47,7 @@ namespace LeaveManagementSystemService
         {
             try
             {
+                passwordChange.Password = Encrypt(passwordChange.Password, "sblw-3hn8-sqoy19");
                 return _loginRepository.EditPassword(passwordChange);
             }
             catch (Exception ex)

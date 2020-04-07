@@ -17,6 +17,7 @@ namespace LeaveManagementSystemService
 
         public IEnumerable<LeaveRequestHistory> GetAllRequest(int id)
         {
+            
             return _leaveRepository.GetAllRequest(id);
         }
 

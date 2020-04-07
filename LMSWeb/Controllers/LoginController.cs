@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System;
 using LeaveManagementSystemModels;
+using Microsoft.Extensions.Logging;
 
 namespace LMSWeb.Controllers
 {
@@ -15,16 +16,18 @@ namespace LMSWeb.Controllers
     {
         private readonly ILoginService _loginService;
         private  string message;
+        private readonly ILogger<LoginController> _log;
 
-        public LoginController(ILoginService loginService)
+
+        public LoginController(ILoginService loginService, ILogger<LoginController> log)
         {
             _loginService = loginService;
-
+            _log = log;
         }
 
         [HttpPost]
         [Route("Get")]
-        public ActionResult<LeaveManagementSystemModels.Employee> Get(LeaveManagementSystemModels.LoginDetails loginDetails)
+        public ActionResult<Employee> Get(LoginDetails loginDetails)
         {
             try
             {
@@ -33,13 +36,14 @@ namespace LMSWeb.Controllers
             catch(Exception ex)
             {
                 var message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
 
         [HttpPost]
         [Route("Add")]
-        public IActionResult Add([FromBody] LeaveManagementSystemModels.Login login)
+        public IActionResult Add([FromBody] Login login)
         {
             try
             {
@@ -48,6 +52,7 @@ namespace LMSWeb.Controllers
             catch(Exception ex)
             {
                 var message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
@@ -63,6 +68,7 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }

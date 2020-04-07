@@ -38,6 +38,7 @@ namespace LeaveManagementSystemRepository
                 lst.Add(projects);
 
             }
+            sqlconn.Close();
             return lst;
         }
 

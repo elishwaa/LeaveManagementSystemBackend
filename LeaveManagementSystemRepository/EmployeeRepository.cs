@@ -26,10 +26,10 @@ namespace LeaveManagementSystemRepository
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
                 sqlComm.Parameters.AddWithValue("@empType", employee.EmpType);
-                sqlComm.Parameters.AddWithValue("@firstName", employee.FirstName.ToString());
-                sqlComm.Parameters.AddWithValue("@middleName", employee.MiddleName.ToString());
-                sqlComm.Parameters.AddWithValue("@lastName", employee.LastName.ToString());
-                sqlComm.Parameters.AddWithValue("@email", employee.Email.ToString());
+                sqlComm.Parameters.AddWithValue("@firstName", employee.FirstName);
+                sqlComm.Parameters.AddWithValue("@middleName", employee.MiddleName);
+                sqlComm.Parameters.AddWithValue("@lastName", employee.LastName);
+                sqlComm.Parameters.AddWithValue("@email", employee.Email);
                 sqlComm.Parameters.AddWithValue("@salary", employee.Salary);
                 sqlComm.Parameters.AddWithValue("@locationId", employee.Location);
                 sqlComm.Parameters.AddWithValue("@project", employee.Project);
@@ -39,10 +39,10 @@ namespace LeaveManagementSystemRepository
                 sqlCommand.Connection = sqlconn;
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@manager", employee.Manager);
-                sqlCommand.Parameters.AddWithValue("@email", employee.Email.ToString());
+                sqlCommand.Parameters.AddWithValue("@email", employee.Email);
 
                 sqlCommand.ExecuteNonQuery();
-
+                sqlconn.Close();
                 return true;
             }
             catch (Exception e)
@@ -66,6 +66,7 @@ namespace LeaveManagementSystemRepository
                 if (sdr.Read())
                 {
                     var employeeId = (int)sdr["Id"];
+                    sqlconn.Close();
                     return employeeId;
                 }
                 else
@@ -91,10 +92,10 @@ namespace LeaveManagementSystemRepository
                 sqlComm.CommandType = CommandType.StoredProcedure;
                 sqlComm.Parameters.AddWithValue("@id", employee.Id);
                 sqlComm.Parameters.AddWithValue("@typeId", employee.TypeId);
-                sqlComm.Parameters.AddWithValue("@firstName", employee.FirstName.ToString());
-                sqlComm.Parameters.AddWithValue("@middleName", employee.MiddleName.ToString());
-                sqlComm.Parameters.AddWithValue("@lastName", employee.LastName.ToString());
-                sqlComm.Parameters.AddWithValue("@email", employee.Email.ToString());
+                sqlComm.Parameters.AddWithValue("@firstName", employee.FirstName);
+                sqlComm.Parameters.AddWithValue("@middleName", employee.MiddleName);
+                sqlComm.Parameters.AddWithValue("@lastName", employee.LastName);
+                sqlComm.Parameters.AddWithValue("@email", employee.Email);
                 sqlComm.Parameters.AddWithValue("@salary", employee.Salary);
                 sqlComm.Parameters.AddWithValue("@username", employee.Username);
                 sqlComm.Parameters.AddWithValue("@projectId", employee.ProjectId);
@@ -111,87 +112,111 @@ namespace LeaveManagementSystemRepository
 
         public IEnumerable<Employee> GetAll()
         {
-            List<Employee> lstemployee = new List<Employee>();
-            SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlCom = new SqlCommand("allEmployees");
-            sqlconn.Open();
-            sqlCom.Connection = sqlconn;
-            sqlCom.CommandType = CommandType.StoredProcedure;
-            SqlDataReader sdr = sqlCom.ExecuteReader();
-            while (sdr.Read())
+            try
             {
-                Employee employee = new Employee();
-                employee.Id = (int)sdr["Id"];
-                employee.TypeId = (int)sdr["TypeId"];
-                employee.TypeName = sdr["EType"].ToString();
-                employee.FirstName = sdr["FirstName"].ToString();
-                employee.MiddleName = sdr["MiddleName"].ToString();
-                employee.LastName = sdr["LastName"].ToString();
-                employee.Email = sdr["Email"].ToString();
-                employee.Salary = (int)sdr["Salary "];
-                employee.LocationId = (int)sdr["LocationId"];
-                employee.LocationName = sdr["LName"].ToString();
-                employee.ManagerId = (int)sdr["ManagerId"];
-                employee.ManagerName = sdr["Manager"].ToString();
-                employee.ProjectId = (int)sdr["ProjectId"];
-                employee.ProjectName = sdr["ProjectName"].ToString();
-               
-                if (sdr["Username"] != DBNull.Value)
+                List<Employee> lstemployee = new List<Employee>();
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlCom = new SqlCommand("allEmployees");
+                sqlconn.Open();
+                sqlCom.Connection = sqlconn;
+                sqlCom.CommandType = CommandType.StoredProcedure;
+                SqlDataReader sdr = sqlCom.ExecuteReader();
+                while (sdr.Read())
                 {
-                    employee.Username = sdr["Username"].ToString();
+                    Employee employee = new Employee();
+                    employee.Id = (int)sdr["Id"];
+                    employee.TypeId = (int)sdr["TypeId"];
+                    employee.TypeName = sdr["EType"].ToString();
+                    employee.FirstName = sdr["FirstName"].ToString();
+                    employee.MiddleName = sdr["MiddleName"].ToString();
+                    employee.LastName = sdr["LastName"].ToString();
+                    employee.Email = sdr["Email"].ToString();
+                    employee.Salary = (int)sdr["Salary "];
+                    employee.LocationId = (int)sdr["LocationId"];
+                    employee.LocationName = sdr["LName"].ToString();
+                    employee.ManagerId = (int)sdr["ManagerId"];
+                    employee.ManagerName = sdr["Manager"].ToString();
+                    employee.ProjectId = (int)sdr["ProjectId"];
+                    employee.ProjectName = sdr["ProjectName"].ToString();
+
+                    if (sdr["Username"] != DBNull.Value)
+                    {
+                        employee.Username = sdr["Username"].ToString();
+                    }
+                    else
+                    {
+                        employee.Username = "not-assigned";
+                    }
+                    lstemployee.Add(employee);
                 }
-                else
-                {
-                    employee.Username = "not-assigned";
-                }
-                lstemployee.Add(employee);
+                sqlconn.Close();
+                return lstemployee;
             }
-            sqlconn.Close();
-            return lstemployee;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public IEnumerable<EmployeeType> GetType()
         {
-            List<EmployeeType> lstEmpType = new List<EmployeeType>();
-
-            SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("getEmployeeType");
-            sqlconn.Open();
-            sqlComm.Connection = sqlconn;
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            SqlDataReader sdr = sqlComm.ExecuteReader();
-            while (sdr.Read())
+            try
             {
-                EmployeeType empType = new EmployeeType();
-                empType.Id = (int)sdr["Id"];
-                empType.EmpType = sdr["EType"].ToString();
-                lstEmpType.Add(empType);
+                List<EmployeeType> lstEmpType = new List<EmployeeType>();
+
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("getEmployeeType");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                SqlDataReader sdr = sqlComm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    EmployeeType empType = new EmployeeType();
+                    empType.Id = (int)sdr["Id"];
+                    empType.EmpType = sdr["EType"].ToString();
+                    lstEmpType.Add(empType);
+                }
+
+                sqlconn.Close();
+                return lstEmpType;
             }
-
-
-            return lstEmpType;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+           
         }
 
         public IEnumerable<Managers> GetManagers()
         {
-            List<Managers> lstManager = new List<Managers>();
-
-            SqlConnection sqlconn = new SqlConnection(connectionString);
-            SqlCommand sqlComm = new SqlCommand("getManagers");
-            sqlconn.Open();
-            sqlComm.Connection = sqlconn;
-            sqlComm.CommandType = CommandType.StoredProcedure;
-            SqlDataReader sdr = sqlComm.ExecuteReader();
-            while (sdr.Read())
+            try
             {
-                Managers manager = new Managers();
-                manager.ManagerId = (int)sdr["EmployeeId"];
-                manager.ManagerName = sdr["EmployeeName"].ToString();
+                List<Managers> lstManager = new List<Managers>();
 
-                lstManager.Add(manager);
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                SqlCommand sqlComm = new SqlCommand("getManagers");
+                sqlconn.Open();
+                sqlComm.Connection = sqlconn;
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                SqlDataReader sdr = sqlComm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    Managers manager = new Managers();
+                    manager.ManagerId = (int)sdr["EmployeeId"];
+                    manager.ManagerName = sdr["EmployeeName"].ToString();
+
+                    lstManager.Add(manager);
+                }
+                sqlconn.Close();
+                return lstManager;
             }
-
-            return lstManager;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+           
         }
 
         public bool AddDesignation(EmployeeAddDesignation designation)

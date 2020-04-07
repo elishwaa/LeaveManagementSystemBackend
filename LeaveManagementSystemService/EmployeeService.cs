@@ -54,17 +54,38 @@ namespace LeaveManagementSystemService
 
         public IEnumerable<Employee> GetAll()
         {
-            return _employeeRepository.GetAll();
+            try
+            {
+                return _employeeRepository.GetAll();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IEnumerable<EmployeeType> GetType()
         {
-            return _employeeRepository.GetType();
+            try
+            {
+                return _employeeRepository.GetType();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IEnumerable<Managers> GetManagers()
         {
-            return _employeeRepository.GetManagers();
+            try
+            {
+                return _employeeRepository.GetManagers();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool AddDesignation(EmployeeAddDesignation designation)

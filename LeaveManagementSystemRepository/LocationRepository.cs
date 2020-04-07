@@ -57,6 +57,7 @@ namespace LeaveManagementSystemRepository
                     location.LocationName = sdr["LName"].ToString();
                     lstLocation.Add(location);
                 }
+                sqlconn.Close();
                 return lstLocation;
             }
             catch(Exception ex)

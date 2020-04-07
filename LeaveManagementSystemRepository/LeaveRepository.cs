@@ -30,12 +30,13 @@ namespace LeaveManagementSystemRepository
             SqlDataReader sdr = sqlComm.ExecuteReader();
             while (sdr.Read())
             {
+
                 LeaveRequestHistory leaveRequestHistory = new LeaveRequestHistory();
                 leaveRequestHistory.Id = (int)sdr["Id"];
                 leaveRequestHistory.EmpId = (int)sdr["EmployeeId"];
                 leaveRequestHistory.EmployeeName = sdr["EmpName"].ToString();
-                leaveRequestHistory.StartDate = sdr["StartDate"].ToString();
-                leaveRequestHistory.EndDate = sdr["EndDate"].ToString();
+                leaveRequestHistory.StartDate = Convert.ToDateTime(sdr["StartDate"]).ToString("MM/dd/yyyy");
+                leaveRequestHistory.EndDate = Convert.ToDateTime(sdr["EndDate"]).ToString("MM/dd/yyyy");
                 leaveRequestHistory.LeaveId = (int)sdr["LeaveId"];
                 leaveRequestHistory.Leave = sdr["EType"].ToString();
                 leaveRequestHistory.Status = sdr["Status"].ToString();
@@ -220,7 +221,7 @@ namespace LeaveManagementSystemRepository
                 leaves.LeaveName = sdr["EType"].ToString();
                 lstLeaves.Add(leaves);
             }
-
+            sqlconn.Close();
             return lstLeaves;
         }
 
@@ -237,6 +238,7 @@ namespace LeaveManagementSystemRepository
                 SqlParameter returnParameter = sqlComm.Parameters.Add("RetVal", SqlDbType.Int);
                 returnParameter.Direction = ParameterDirection.ReturnValue;
                 sqlComm.ExecuteNonQuery();
+                sqlconn.Close();
                 int id = (int)returnParameter.Value;
                 if (id == 1)
                 {
@@ -246,6 +248,7 @@ namespace LeaveManagementSystemRepository
                 {
                     return false;
                 }
+                
             }
             catch (Exception e)
             {
@@ -263,13 +266,14 @@ namespace LeaveManagementSystemRepository
                 sqlComm.Connection = sqlconn;
                 sqlComm.CommandType = CommandType.StoredProcedure;
                 sqlComm.Parameters.AddWithValue("@empId", leaverequest.EmpId);
-                sqlComm.Parameters.AddWithValue("@startDate", leaverequest.StartDate.ToString("MM-dd-yyyy"));
-                sqlComm.Parameters.AddWithValue("@endDate", leaverequest.EndDate.ToString("MM-dd-yyyy"));
+                sqlComm.Parameters.AddWithValue("@startDate", leaverequest.StartDate);
+                sqlComm.Parameters.AddWithValue("@endDate", leaverequest.EndDate);
                 sqlComm.Parameters.AddWithValue("@leaveId", leaverequest.Leave);
                 sqlComm.Parameters.AddWithValue("@reason", leaverequest.Reason);
                 SqlParameter returnParameter = sqlComm.Parameters.Add("RetVal", SqlDbType.Int);
                 returnParameter.Direction = ParameterDirection.ReturnValue;
                 sqlComm.ExecuteNonQuery();
+                sqlconn.Close();
                 int id = (int)returnParameter.Value;
                 if (id == 1)
                 {
@@ -279,6 +283,7 @@ namespace LeaveManagementSystemRepository
                 {
                     return false;
                 }
+                
 
             }
             catch(Exception ex)
@@ -311,7 +316,7 @@ namespace LeaveManagementSystemRepository
                 transactions.Status = sdr["Status"].ToString();
                 lstTransactions.Add(transactions);
             }
-
+            sqlconn.Close();
             return lstTransactions;
         }
 

@@ -8,6 +8,7 @@ using System.Data;
 using Newtonsoft.Json;
 using LeaveManagementSystemService;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace LMSWeb.Controllers
 {
@@ -18,11 +19,15 @@ namespace LMSWeb.Controllers
     {
         private readonly ILeaveService _leaveService;
         private string message;
-        public LeaveController(ILeaveService leaveService)
+        private readonly ILogger<LeaveController> _log;
+
+        public LeaveController(ILeaveService leaveService, ILogger<LeaveController> log)
         {
             _leaveService = leaveService;
+            _log = log;
+
         }
-        
+
 
         [HttpPost]
         [Route("AddRequest")]
@@ -35,22 +40,42 @@ namespace LMSWeb.Controllers
             catch(Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
 
         [HttpGet]
         [Route("GetRequest")]
-        public IEnumerable<LeaveRequestHistory> GetRequest(int id)
+        public ActionResult<IEnumerable<LeaveRequestHistory>> GetRequest(int id)
         {
-            return _leaveService.GetRequest(id);
+            try
+            {
+                return Ok(_leaveService.GetRequest(id));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
+
         }
 
         [HttpGet]
         [Route("GetAll")]
-        public IEnumerable<LeaveRequestHistory> GetAllRequest(int id)
+        public ActionResult<IEnumerable<LeaveRequestHistory>> GetAllRequest(int id)
         {
-            return _leaveService.GetAllRequest(id);
+            try
+            {
+                return Ok(_leaveService.GetAllRequest(id));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpDelete]
@@ -64,6 +89,7 @@ namespace LMSWeb.Controllers
             catch(Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
@@ -79,6 +105,7 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
 
@@ -94,6 +121,7 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
@@ -109,29 +137,57 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
 
         [HttpGet]
         [Route("Transactions")]
-        public IEnumerable<LeaveTransactions> Transactions(int id)
+        public ActionResult<IEnumerable<LeaveTransactions>> Transactions(int id)
         {
-            return _leaveService.Transactions(id);
+            try
+            {
+                return Ok(_leaveService.Transactions(id));
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpGet]
         [Route("Get")]
-        public IEnumerable<Leaves> Get()
+        public ActionResult<IEnumerable<Leaves>> Get()
         {
-            return _leaveService.Get();
+            try
+            {
+                return Ok(_leaveService.Get());
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpGet]
         [Route("GetLeaveBalance")]
-        public string GetLeaveBalance(int id)
+        public ActionResult<string> GetLeaveBalance(int id)
         {
-            return _leaveService.GetLeaveBalance(id);
+            try
+            {
+                return Ok(_leaveService.GetLeaveBalance(id));
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpPost]
@@ -145,6 +201,7 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
@@ -161,6 +218,7 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }

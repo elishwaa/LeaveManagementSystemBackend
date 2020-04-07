@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using LeaveManagementSystemModels;
 using LeaveManagementSystemService;
+using log4net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LMSWeb.Controllers
 {
@@ -15,9 +18,11 @@ namespace LMSWeb.Controllers
     {
         private string message;
         private readonly IProjectService _projectService;
-        public ProjectController(IProjectService projectService)
+        private readonly ILogger<ProjectController> _log;
+        public ProjectController(IProjectService projectService, ILogger<ProjectController> log)
         {
             _projectService = projectService;
+            _log = log;
         }
 
         [HttpPost]
@@ -31,17 +36,26 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message); 
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
-
         }
 
 
         [HttpGet]
         [Route("Get")]
-        public IEnumerable<Projects> Get()
+        public ActionResult<IEnumerable<Projects>> Get()
         {
-            return _projectService.Get();
+            try
+            {
+                return Ok(_projectService.Get());
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return null;
+            }
         }
     }
 }

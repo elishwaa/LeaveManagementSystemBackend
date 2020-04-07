@@ -5,20 +5,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Web.Http.Cors;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.Logging;
 
 namespace LMSWeb
 {
     public class Startup
     {
         EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
-        //config.EnableCors(cors);
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             
-            
         }
-       
 
         public IConfiguration Configuration { get; }
 
@@ -58,22 +56,13 @@ namespace LMSWeb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddLog4Net();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            //app.UseSwagger(C =>
-            //{
-            //    C.RouteTemplate = "swagger/{documentName}/swagger.json";
-            //}
-            //);
-
-            //app.UseSwaggerUI(C => {
-            //    C.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
-            //    C.RoutePrefix = "swagger";
-            //});
             app.UseSession();
             
             app.UseCors(MyAllowSpecificOrigins);
@@ -83,10 +72,6 @@ namespace LMSWeb
             app.UseRouting();
 
             app.UseAuthorization();
-
-            //app.UseCors(
-            //    options => options.WithOrigins("*").AllowAnyMethod()
-            //    );
 
             app.UseEndpoints(endpoints =>
             {

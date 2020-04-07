@@ -5,6 +5,7 @@ using LeaveManagementSystemModels;
 using LeaveManagementSystemService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace lmsweb.controllers
 {
@@ -14,17 +15,30 @@ namespace lmsweb.controllers
     {
         private string message;
         private  IEmployeeService _employeeService;
-        public EmployeeController(IEmployeeService employeeService )
+        private readonly ILogger<EmployeeController> _log;
+
+        public EmployeeController(IEmployeeService employeeService , ILogger<EmployeeController> log)
         {
             _employeeService = employeeService;
+            _log = log;
+
         }
 
 
         [HttpGet]
         [Route("GetType")]
-        public IEnumerable<EmployeeType> GetType()
+        public  ActionResult<IEnumerable<EmployeeType>> GetType()
         {
-            return _employeeService.GetType();
+            try
+            {
+                return Ok(_employeeService.GetType());
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         
@@ -40,6 +54,7 @@ namespace lmsweb.controllers
             catch(Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
@@ -55,6 +70,7 @@ namespace lmsweb.controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
@@ -64,7 +80,16 @@ namespace lmsweb.controllers
 
         public ActionResult<IEnumerable<Employee>> GetAll()
         {
-            return _employeeService.GetAll().ToList();
+            try
+            {
+                return _employeeService.GetAll().ToList();
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
         [HttpPost]
@@ -78,6 +103,7 @@ namespace lmsweb.controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
@@ -92,15 +118,25 @@ namespace lmsweb.controllers
             catch (Exception ex)
             {
                 message = ex.Message;
+                _log.LogError(message);
                 return StatusCode(StatusCodes.Status500InternalServerError, message);
             }
         }
 
         [HttpGet]
         [Route("GetManagers")]
-        public IEnumerable<Managers> GetManagers()
+        public ActionResult<IEnumerable<Managers>> GetManagers()
         {
-            return _employeeService.GetManagers(); 
+            try
+            {
+                return Ok(_employeeService.GetManagers());
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
     }

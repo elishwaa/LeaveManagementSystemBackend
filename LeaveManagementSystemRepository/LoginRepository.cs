@@ -59,8 +59,10 @@ namespace LeaveManagementSystemRepository
                         employee.Email = datareader["Email"].ToString();
                         employee.Salary = (int)datareader["Salary "];
                         employee.Username = datareader["Username"].ToString();
-                        employee.LocationId = (int)datareader["Locationid"];
+                        employee.LocationId = (int)datareader["LocationId"];
                         employee.LocationName = datareader["Lname"].ToString();
+                        employee.ProjectId = (int)datareader["ProjectId"];
+                        employee.ProjectName = datareader["ProjectName"].ToString();
                     }
                 }
                 return employee;
@@ -96,7 +98,7 @@ namespace LeaveManagementSystemRepository
                 }
                 else
                 {
-                    returnValue = true;
+                    returnValue = false;
                 }
 
                 return returnValue;

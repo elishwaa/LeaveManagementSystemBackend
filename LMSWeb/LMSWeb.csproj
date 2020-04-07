@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\LeaveBalanceController.cs" />
+    <Compile Remove="Logger.cs" />
+    <Compile Remove="WeatherForecast.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.1.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
