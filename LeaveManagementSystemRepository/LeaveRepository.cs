@@ -239,16 +239,7 @@ namespace LeaveManagementSystemRepository
                 returnParameter.Direction = ParameterDirection.ReturnValue;
                 sqlComm.ExecuteNonQuery();
                 sqlconn.Close();
-                int id = (int)returnParameter.Value;
-                if (id == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-                
+                return true;
             }
             catch (Exception e)
             {
