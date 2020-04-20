@@ -21,7 +21,7 @@ namespace LeaveManagementSystemService
         {
             try
             {
-                loginDetails.Password = Encrypt(loginDetails.Password, "sblw-3hn8-sqoy19");
+                //loginDetails.Password = Encrypt(loginDetails.Password, "sblw-3hn8-sqoy19");
                 return _loginRepository.Get(loginDetails);
             }
             catch(Exception ex)

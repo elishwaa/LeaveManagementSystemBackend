@@ -238,5 +238,15 @@ D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsof
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.AzureAD.UI.Views.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.AzureAD.UI.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\obj\Debug\netcoreapp3.1\LMSWeb.MvcApplicationPartsAssemblyInfo.cs
 D:\Git\EmployeeLeaveManagementSystem\LMS\LMSWeb\obj\Debug\netcoreapp3.1\LMSWeb.MvcApplicationPartsAssemblyInfo.cache

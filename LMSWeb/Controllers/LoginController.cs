@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using LeaveManagementSystemModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LMSWeb.Controllers
 {
@@ -25,12 +26,14 @@ namespace LMSWeb.Controllers
             _log = log;
         }
 
+        
         [HttpPost]
         [Route("Get")]
         public ActionResult<Employee> Get(LoginDetails loginDetails)
         {
             try
             {
+
                 return Ok(_loginService.Get(loginDetails));
             }
             catch(Exception ex)

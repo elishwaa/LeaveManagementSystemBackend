@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using System.Web.Http.Cors;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LMSWeb
 {
@@ -25,7 +28,8 @@ namespace LMSWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+            //services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+            //            .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -36,7 +40,14 @@ namespace LMSWeb
                         .AllowAnyMethod()
                         .AllowAnyMethod();
                     });
+                //options.AddPolicy("AzureAd", builder => builder
+                //    .WithOrigins("http://localhost:4200", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
+                //    .AllowAnyMethod()
+                //    .AllowAnyHeader()
+                //    .AllowCredentials()
+                //     );
             });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddTransient<LeaveManagementSystemService.ILoginService, LeaveManagementSystemService.LoginService>();
             services.AddTransient<LeaveManagementSystemRepository.ILoginRepository, LeaveManagementSystemRepository.LoginRepository>();
             services.AddTransient<LeaveManagementSystemService.IEmployeeService , LeaveManagementSystemService.EmployeeService>();
@@ -63,6 +74,9 @@ namespace LMSWeb
             {
                 app.UseDeveloperExceptionPage();
             }
+            //app.UseCors("AzurePolicy");
+            app.UseAuthentication();
+
             app.UseSession();
             
             app.UseCors(MyAllowSpecificOrigins);

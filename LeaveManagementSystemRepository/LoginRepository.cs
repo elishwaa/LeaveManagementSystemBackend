@@ -36,7 +36,6 @@ namespace LeaveManagementSystemRepository
                 sqlcomm.Connection = sqlconn;
                 sqlcomm.CommandType = CommandType.StoredProcedure;
                 sqlcomm.Parameters.AddWithValue("@Username", loginDetails.Username);
-                sqlcomm.Parameters.AddWithValue("@Password", loginDetails.Password);
                 SqlDataReader sdr = sqlcomm.ExecuteReader();
 
                 if (sdr.Read())
