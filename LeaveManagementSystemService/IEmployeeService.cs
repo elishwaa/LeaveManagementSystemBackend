@@ -7,7 +7,7 @@ namespace LeaveManagementSystemService
 {
     public interface IEmployeeService : IService
     {
-        
+        Employee Get(int id);
         int GetEmail(string emailId);
         bool Edit(Employee employee);
         IEnumerable<Employee> GetAll();

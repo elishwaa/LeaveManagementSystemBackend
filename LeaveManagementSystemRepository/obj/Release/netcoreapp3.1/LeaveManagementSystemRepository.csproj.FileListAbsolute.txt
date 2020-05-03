@@ -1,0 +1,11 @@
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\bin\Release\netcoreapp3.1\LeaveManagementSystemRepository.deps.json
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\bin\Release\netcoreapp3.1\LeaveManagementSystemRepository.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\bin\Release\netcoreapp3.1\LeaveManagementSystemRepository.pdb
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\bin\Release\netcoreapp3.1\LeaveManagementSystemModels.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\bin\Release\netcoreapp3.1\LeaveManagementSystemModels.pdb
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\obj\Release\netcoreapp3.1\LeaveManagementSystemRepository.csprojAssemblyReference.cache
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\obj\Release\netcoreapp3.1\LeaveManagementSystemRepository.AssemblyInfoInputs.cache
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\obj\Release\netcoreapp3.1\LeaveManagementSystemRepository.AssemblyInfo.cs
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\obj\Release\netcoreapp3.1\LeaveManagementSystemRepository.csproj.CopyComplete
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\obj\Release\netcoreapp3.1\LeaveManagementSystemRepository.dll
+D:\Git\EmployeeLeaveManagementSystem\LMS\LeaveManagementSystemRepository\obj\Release\netcoreapp3.1\LeaveManagementSystemRepository.pdb

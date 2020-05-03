@@ -27,6 +27,19 @@ namespace LeaveManagementSystemService
             }
         }
 
+        public Employee Get(int id)
+        {
+            try
+            {
+                //loginDetails.Password = Encrypt(loginDetails.Password, "sblw-3hn8-sqoy19");
+                return _employeeRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
 
         public int GetEmail(string emailId)
         {

@@ -13,6 +13,7 @@ namespace LeaveManagementSystemModels
         public string LastName { get; set; }
         public string Email { get; set; }
         public int Salary { get; set; }
+        public string Username { get; set; }
         public int Manager { get; set; } 
         public int Project { get; set; }
         public int Location { get; set; }

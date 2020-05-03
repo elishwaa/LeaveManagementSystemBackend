@@ -41,7 +41,21 @@ namespace lmsweb.controllers
             }
         }
 
-        
+        [HttpGet]
+        [Route("Get")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                return Ok(_employeeService.Get(id));
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                _log.LogError(message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
+        }
 
         [HttpGet]
         [Route("GetEmail")]

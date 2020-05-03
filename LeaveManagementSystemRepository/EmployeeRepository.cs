@@ -16,6 +16,46 @@ namespace LeaveManagementSystemRepository
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
+        public Employee Get(int id)
+        {
+            try
+            {
+                Employee employee = new Employee();
+
+                SqlConnection sqlconn = new SqlConnection(connectionString);
+                sqlconn.Open();
+               
+                SqlCommand sqlcom = new SqlCommand("employeeDetails");
+                sqlcom.Connection = sqlconn;
+                sqlcom.CommandType = CommandType.StoredProcedure;
+                sqlcom.Parameters.AddWithValue("@employeeid", id);
+                SqlDataReader datareader = sqlcom.ExecuteReader();
+                if (datareader.Read())
+                {
+                    employee.Id = (int)datareader["Id"];
+                    employee.TypeId = (int)datareader["Typeid"];
+                    employee.TypeName = datareader["Etype"].ToString();
+                    employee.FirstName = datareader["Firstname"].ToString();
+                    employee.MiddleName = datareader["Middlename"].ToString();
+                    employee.LastName = datareader["Lastname"].ToString();
+                    employee.Email = datareader["Email"].ToString();
+                    employee.Salary = (int)datareader["Salary "];
+                    employee.Username = datareader["Username"].ToString();
+                    employee.LocationId = (int)datareader["LocationId"];
+                    employee.LocationName = datareader["Lname"].ToString();
+                    employee.ProjectId = (int)datareader["ProjectId"];
+                    employee.ProjectName = datareader["ProjectName"].ToString();
+                }
+            
+            return employee;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public bool Add(EmployeeAddRequest employee)
         {
             try
@@ -31,6 +71,7 @@ namespace LeaveManagementSystemRepository
                 sqlComm.Parameters.AddWithValue("@lastName", employee.LastName);
                 sqlComm.Parameters.AddWithValue("@email", employee.Email);
                 sqlComm.Parameters.AddWithValue("@salary", employee.Salary);
+                sqlComm.Parameters.AddWithValue("@username", employee.Username);
                 sqlComm.Parameters.AddWithValue("@locationId", employee.Location);
                 sqlComm.Parameters.AddWithValue("@project", employee.Project);
                 sqlComm.ExecuteNonQuery();
