@@ -7,6 +7,7 @@ namespace LeaveManagementSystemRepository
 {
     public interface IEmployeeRepository : IRepository
     {
+
         Employee Get(int id);
         int GetEmail(string emailId);
         bool Edit(Employee employee);
@@ -15,5 +16,6 @@ namespace LeaveManagementSystemRepository
         bool AddDesignation(EmployeeAddDesignation designation);
         IEnumerable<Managers> GetManagers();
         IEnumerable<EmployeeType> GetType();
+
     }
 }

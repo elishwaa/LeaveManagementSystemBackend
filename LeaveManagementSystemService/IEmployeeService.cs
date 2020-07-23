@@ -15,5 +15,7 @@ namespace LeaveManagementSystemService
         bool AddDesignation(EmployeeAddDesignation designation);
         IEnumerable<Managers> GetManagers();
         IEnumerable<EmployeeType> GetType();
+
+       
     }
 }

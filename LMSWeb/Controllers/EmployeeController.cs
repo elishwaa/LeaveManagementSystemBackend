@@ -24,11 +24,42 @@ namespace lmsweb.controllers
 
         }
 
+         [HttpGet]
+        [Route("api/key")]
+        public async Task<dynamic> GetKey()
+        {
+
+            Random rnd = new Random();
+            Byte[] b = new Byte[16];
+            rnd.NextBytes(b);
+            string b1 = Convert.ToBase64String(b);
+
+
+            byte[] key = Convert.FromBase64String("VmtZcDNzNnY5eSRCJkUpSA==");
+            byte[] data = Encoding.UTF8.GetBytes("Hello World");
+
+
+            byte[] encrypt = AES.AES_Encrypt(data, key);
+
+            string hexa = AES.ByteArrayToHexString(encrypt);
+
+            string base64 = Convert.ToBase64String(encrypt);
+            byte[] utf8 = Encoding.UTF8.GetBytes(base64);
+
+
+            byte[] decrypt = AES.AES_Decrypt(encrypt, key);
+
+            string result = Encoding.UTF8.GetString(decrypt, 0, decrypt.Length);
+
+            return new { hexa, base64, result };
+
+        }
 
         [HttpGet]
         [Route("GetType")]
         public  ActionResult<IEnumerable<EmployeeType>> GetType()
         {
+           
             try
             {
                 return Ok(_employeeService.GetType());

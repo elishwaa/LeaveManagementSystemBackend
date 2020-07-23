@@ -11,7 +11,7 @@ namespace LeaveManagementSystemRepository
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly string connectionString;
-        public EmployeeRepository(IConfiguration configuration)
+        public  EmployeeRepository(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }

@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMSWeb", "LMSWeb\LMSWeb.csproj", "{B38F9191-E9BB-4108-A492-620288BAA361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagementSystemRepository", "LeaveManagementSystemRepository\LeaveManagementSystemRepository.csproj", "{D32EF750-DF9C-437A-A610-3B637B735995}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagementSystemRepository", "LeaveManagementSystemRepository\LeaveManagementSystemRepository.csproj", "{D32EF750-DF9C-437A-A610-3B637B735995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagementSystemService", "LeaveManagementSystemService\LeaveManagementSystemService.csproj", "{FE97A2B4-AB78-471C-A9E8-3468E37B27CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagementSystemService", "LeaveManagementSystemService\LeaveManagementSystemService.csproj", "{FE97A2B4-AB78-471C-A9E8-3468E37B27CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagementSystemModels", "LeaveManagementSystemModels\LeaveManagementSystemModels.csproj", "{8524287A-8B81-4A70-9F51-27AE29E6CCED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagementSystemModels", "LeaveManagementSystemModels\LeaveManagementSystemModels.csproj", "{8524287A-8B81-4A70-9F51-27AE29E6CCED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagementSystemTest", "LeaveManagementSystemTest\LeaveManagementSystemTest.csproj", "{3CC85C04-A5FE-41E8-A00F-B0F0334137EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8524287A-8B81-4A70-9F51-27AE29E6CCED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8524287A-8B81-4A70-9F51-27AE29E6CCED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8524287A-8B81-4A70-9F51-27AE29E6CCED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC85C04-A5FE-41E8-A00F-B0F0334137EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC85C04-A5FE-41E8-A00F-B0F0334137EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC85C04-A5FE-41E8-A00F-B0F0334137EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC85C04-A5FE-41E8-A00F-B0F0334137EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

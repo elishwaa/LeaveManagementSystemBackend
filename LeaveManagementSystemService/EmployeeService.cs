@@ -17,6 +17,7 @@ namespace LeaveManagementSystemService
 
         public bool Add(EmployeeAddRequest employee)
         {
+            
             try
             {
                 return _employeeRepository.Add(employee);
